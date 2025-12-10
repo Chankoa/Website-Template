@@ -1,0 +1,82 @@
+---
+import { siteConfig } from "../../data/site-config";
+
+interface Props {
+  title?: string;
+  intro?: string;
+}
+
+const {
+  title = "Contact",
+  intro = "Un projet, une question, une envie de collaborer ? Laissez-nous un message.",
+} = Astro.props;
+---
+
+<section class="py-16" id="contact">
+  <div class="max-w-5xl mx-auto px-4 grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start">
+    <div class="space-y-4">
+      <h2 class="text-2xl sm:text-3xl font-semibold">
+        {title}
+      </h2>
+      <p class="text-sm sm:text-base text-[var(--color-muted)]">
+        {intro}
+      </p>
+      <div class="space-y-1 text-sm text-[var(--color-muted)]">
+        {siteConfig.contact.phone && (
+          <p>Tél. : <a href={`tel:${siteConfig.contact.phone}`} class="hover:text-[var(--color-accent)]">{siteConfig.contact.phone}</a></p>
+        )}
+        {siteConfig.contact.email && (
+          <p>Email : <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-[var(--color-accent)]">{siteConfig.contact.email}</a></p>
+        )}
+        {siteConfig.contact.address && (
+          <p>Adresse : {siteConfig.contact.address}</p>
+        )}
+      </div>
+    </div>
+
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      class="card-elevated p-6 space-y-4 text-sm"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+
+      <div class="space-y-1">
+        <label for="name" class="font-medium">Nom</label>
+        <input
+          id="name"
+          name="name"
+          required
+          class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label for="email" class="font-medium">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label for="message" class="font-medium">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary w-full justify-center">
+        Envoyer
+      </button>
+    </form>
+  </div>
+</section>

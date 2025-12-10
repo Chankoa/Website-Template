@@ -1,0 +1,12 @@
+/* Charte graphique Blue Ocean : VARIABLES */
+
+:root {
+
+    /* Couleurs */
+    --color-1: #0F2A43; /* couleur des headings et bg (ex: footer) */
+    --color-2: #13919B; /* bg des .btn (hover) */
+    --color-3: #2CB1BC; /* bg .btn (défaut) */
+    --color-4: #F5F7FA; /* bg light */
+    --color-5: #FFFFFF; /* bg (ex: footer) */
+}
+

@@ -1,0 +1,24 @@
+---
+import { siteConfig } from "../../data/site-config";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] mt-16">
+  <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-[var(--color-muted)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <p>
+      © {year} {siteConfig.name}. Tous droits réservés.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      {siteConfig.contact.phone && (
+        <a href={`tel:${siteConfig.contact.phone}`} class="hover:text-[var(--color-accent)]">
+          {siteConfig.contact.phone}
+        </a>
+      )}
+      {siteConfig.contact.email && (
+        <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-[var(--color-accent)]">
+          {siteConfig.contact.email}
+        </a>
+      )}
+    </div>
+  </div>
+</footer>

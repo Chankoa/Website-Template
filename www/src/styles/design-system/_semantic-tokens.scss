@@ -1,0 +1,75 @@
+@use "sass:map";
+
+/*
+ * File: _semantic-tokens.scss
+ * Purpose: Map semantic color roles to CSS custom properties and provide theming mixin.
+ * Updated: 2025-12-10
+ */
+
+$default-theme: (
+  surface-bg: #fdfcf7,
+  surface-card: #ffffff,
+  surface-muted: #f3f4f7,
+  text-strong: #0f1c2d,
+  text-default: #222222,
+  text-muted: #5e6a7a,
+  text-inverse: #ffffff,
+  border-soft: #e3e8ef,
+  border-strong: #cfd8e6,
+  accent-primary: #ff4d00,
+  accent-primary-strong: #d63d00,
+  accent-secondary: #00bfa5,
+  accent-tertiary: #ffb400,
+  status-info: #2cb1bc,
+  status-success: #41c399,
+  status-warning: #ffb347,
+  status-danger: #ff5a5f
+);
+
+$dark-theme: (
+  surface-bg: #0b1524,
+  surface-card: #111b2e,
+  surface-muted: #1b273d,
+  text-strong: #f5f7fb,
+  text-default: #dbe3ef,
+  text-muted: #a0adc3,
+  text-inverse: #0b1524,
+  border-soft: #1f2b43,
+  border-strong: #233455,
+  accent-primary: #ff7840,
+  accent-primary-strong: #ff5717,
+  accent-secondary: #09d1b7,
+  accent-tertiary: #ffd26a,
+  status-info: #4cd6e0,
+  status-success: #52d2a7,
+  status-warning: #ffc76d,
+  status-danger: #ff7a85
+);
+
+@mixin apply-theme($tokens) {
+  --surface-bg: #{map.get($tokens, surface-bg)};
+  --surface-card: #{map.get($tokens, surface-card)};
+  --surface-muted: #{map.get($tokens, surface-muted)};
+  --text-strong: #{map.get($tokens, text-strong)};
+  --text-default: #{map.get($tokens, text-default)};
+  --text-muted: #{map.get($tokens, text-muted)};
+  --text-inverse: #{map.get($tokens, text-inverse)};
+  --border-soft: #{map.get($tokens, border-soft)};
+  --border-strong: #{map.get($tokens, border-strong)};
+  --accent-primary: #{map.get($tokens, accent-primary)};
+  --accent-primary-strong: #{map.get($tokens, accent-primary-strong)};
+  --accent-secondary: #{map.get($tokens, accent-secondary)};
+  --accent-tertiary: #{map.get($tokens, accent-tertiary)};
+  --status-info: #{map.get($tokens, status-info)};
+  --status-success: #{map.get($tokens, status-success)};
+  --status-warning: #{map.get($tokens, status-warning)};
+  --status-danger: #{map.get($tokens, status-danger)};
+}
+
+:root {
+  @include apply-theme($default-theme);
+}
+
+:root[data-theme="dark"] {
+  @include apply-theme($dark-theme);
+}

@@ -1,0 +1,20 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import SectionAbout from "../components/sections/SectionAbout.astro";
+
+const aboutText = `Texte plus détaillé sur vous ou l’entreprise : parcours, valeurs, façon de travailler.`;
+
+const aboutPoints = [
+  "Accompagnement personnalisé",
+  "Explications claires, sans jargon",
+  "Un site pensé pour vos utilisateurs",
+];
+---
+
+<Layout title="À propos">
+  <section class="pt-16 pb-8">
+    <div class="max-w-5xl mx-auto px-4">
+      <SectionAbout title="À propos" text={aboutText} points={aboutPoints} />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,27 @@
+@use "../foundations";
+@use "../semantic-tokens";
+
+/*
+ * File: themes/_default.scss
+ * Purpose: Preserve base tokens when data-theme="default" is active.
+ * Updated: 2025-12-10
+ */
+
+:root[data-theme="default"] {
+  --surface-bg: var(--surface-bg);
+  --surface-card: var(--surface-card);
+  --surface-muted: var(--surface-muted);
+  --text-strong: var(--text-strong);
+  --text-default: var(--text-default);
+  --text-muted: var(--text-muted);
+  --border-soft: var(--border-soft);
+  --border-strong: var(--border-strong);
+  --accent-primary: var(--accent-primary);
+  --accent-primary-strong: var(--accent-primary-strong);
+  --accent-secondary: var(--accent-secondary);
+  --accent-tertiary: var(--accent-tertiary);
+  --status-info: var(--status-info);
+  --status-success: var(--status-success);
+  --status-warning: var(--status-warning);
+  --status-danger: var(--status-danger);
+}

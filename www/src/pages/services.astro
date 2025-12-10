@@ -1,0 +1,30 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import SectionServices from "../components/sections/SectionServices.astro";
+
+const services = [
+  {
+    title: "Pack vitrine essentiel",
+    highlight: "Idéal pour démarrer",
+    description: "Accueil, présentation, services, contact : l’essentiel pour être présent en ligne et rassurer vos clients.",
+  },
+  {
+    title: "Pack vitrine + contenu",
+    highlight: "Plus complet",
+    description: "Ajout de rubriques, mise en valeur de vos réalisations, rédaction adaptée à votre ton.",
+  },
+  {
+    title: "Sur mesure",
+    highlight: "À définir ensemble",
+    description: "Pour les projets spécifiques : multi-langues, sections avancées, intégrations tierces, etc.",
+  },
+];
+---
+
+<Layout title="Services">
+  <SectionServices
+    title="Nos offres de création de site vitrine"
+    intro="Des formules lisibles, que l’on adapte ensuite à la réalité de votre activité."
+    services={services}
+  />
+</Layout>

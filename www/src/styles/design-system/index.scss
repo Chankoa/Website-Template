@@ -1,0 +1,33 @@
+@use "./foundations";
+@use "./semantic-tokens";
+@use "./themes/blue-ocean";
+
+/*
+ * File: design-system/index.scss
+ * Purpose: Design system entry wiring foundations, semantic tokens, and theme variants.
+ * Updated: 2025-12-10
+ */
+
+:root {
+	--background: var(--surface-bg);
+	--card-bg: var(--surface-card);
+	--muted: var(--surface-muted);
+	--text: var(--text-default);
+	--text-secondary: var(--text-muted);
+	--border: var(--border-soft);
+	--border-strong-color: var(--border-strong);
+	--flame-accent: var(--accent-primary);
+	--color-teal: var(--accent-secondary);
+	--color-saffron: var(--accent-tertiary);
+
+	/* aliases pour compatibilite avec les anciens styles */
+	--color-bg: var(--surface-bg);
+	--color-bg-alt: var(--surface-card);
+	--color-text: var(--text-default);
+	--color-muted: var(--text-muted);
+	--color-accent: var(--accent-primary);
+	--color-border: var(--border-soft);
+	--font-base: var(--font-body);
+	--font-heading: var(--font-heading);
+	--shadow-soft: var(--shadow-md);
+}

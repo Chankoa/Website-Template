@@ -1,0 +1,9 @@
+/*
+ * File: tailwind.css
+ * Purpose: Tailwind layers kept separate so custom SCSS can override them.
+ * Updated: 2025-12-10
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

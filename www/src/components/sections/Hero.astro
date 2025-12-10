@@ -1,0 +1,55 @@
+---
+import { siteConfig } from "../../data/site-config";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  eyebrow = "Site vitrine",
+  title,
+  subtitle = siteConfig.baseline,
+  ctaLabel = "Nous contacter",
+  ctaHref = "/contact",
+} = Astro.props;
+---
+
+<section class="pt-16 pb-20">
+  <div class="max-w-5xl mx-auto px-4 grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center">
+    <div class="space-y-6">
+      <span class="badge-pill text-[var(--color-muted)]">
+        {eyebrow}
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+        {title}
+      </h1>
+      {subtitle && (
+        <p class="text-base sm:text-lg text-[var(--color-muted)] max-w-xl">
+          {subtitle}
+        </p>
+      )}
+      <div class="flex flex-wrap gap-4 items-center pt-2">
+        <a href={ctaHref} class="btn-primary">
+          {ctaLabel}
+        </a>
+        <span class="text-xs text-[var(--color-muted)]">
+          Réponse rapide, sans engagement.
+        </span>
+      </div>
+    </div>
+
+    <div class="card-elevated p-6 md:p-8">
+      <p class="text-sm uppercase tracking-[0.2em] text-[var(--color-muted)] mb-4">
+        À propos
+      </p>
+      <p class="text-sm sm:text-base leading-relaxed">
+        Nous accompagnons vos projets avec une approche sur mesure, humaine et pragmatique :
+        un site clair, efficace, qui donne envie de vous contacter.
+      </p>
+    </div>
+  </div>
+</section>

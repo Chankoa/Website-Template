@@ -1,0 +1,33 @@
+---
+import "../../styles/tailwind.css";
+import "../../styles/main.scss";
+import { siteConfig } from "../../data/site-config";
+import SiteHeader from "./SiteHeader.astro";
+import SiteFooter from "./SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+const metaDescription = description ?? siteConfig.meta.description;
+---
+
+<html lang={siteConfig.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <title>{pageTitle}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={siteConfig.url} />
+  </head>
+  <body class="bg-[var(--surface-bg)] text-[var(--text-default)]">
+    <SiteHeader />
+    <main class="min-h-[70vh]">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

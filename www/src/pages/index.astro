@@ -1,0 +1,49 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import Hero from "../components/sections/Hero.astro";
+import SectionServices from "../components/sections/SectionServices.astro";
+import SectionAbout from "../components/sections/SectionAbout.astro";
+import SectionContact from "../components/sections/SectionContact.astro";
+
+const services = [
+  {
+    title: "Création de site vitrine",
+    highlight: "Sur mesure",
+    description: "Un site clair, rapide et moderne, pensé pour mettre en valeur votre activité et faciliter la prise de contact.",
+  },
+  {
+    title: "Refonte de site existant",
+    highlight: "Mise à jour",
+    description: "Nous modernisons votre site actuel en améliorant lisibilité, performance, ergonomie et référencement.",
+  },
+  {
+    title: "Accompagnement & conseils",
+    highlight: "Stratégie",
+    description: "Nous vous aidons à clarifier vos besoins et à définir un site adapté à vos objectifs réels.",
+  },
+];
+
+const aboutText = `Ici, vous pouvez présenter votre façon de travailler : approche humaine, écoute, simplicité, sobriété, efficacité.`;
+
+const aboutPoints = [
+  "Une approche pédagogique et transparente",
+  "Des sites simples à utiliser, agréables à parcourir",
+  "Un interlocuteur unique, du brief à la mise en ligne",
+];
+---
+
+<Layout title="Accueil">
+  <Hero
+    eyebrow="Sites vitrines modernes"
+    title="Un site web clair, simple et efficace pour votre activité."
+    subtitle="Pas de blabla technique : un site qui rassure vos clients, présente vos services et facilite la prise de contact."
+    ctaLabel="Parler de votre projet"
+    ctaHref="/contact"
+  />
+
+  <SectionServices services={services} />
+
+  <SectionAbout text={aboutText} points={aboutPoints} />
+
+  <SectionContact />
+</Layout>

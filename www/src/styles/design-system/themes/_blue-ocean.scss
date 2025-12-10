@@ -1,0 +1,37 @@
+@use "../semantic-tokens" as tokens;
+
+/*
+ * File: themes/_blue-ocean.scss
+ * Purpose: Blue Ocean theme variant overriding semantic tokens for the blue palette.
+ * Updated: 2025-12-10
+ */
+
+$blue-ocean-tokens: (
+  surface-bg: #f5f7fa,
+  surface-card: #ffffff,
+  surface-muted: #e4edf5,
+  text-strong: #0f2a43,
+  text-default: #153654,
+  text-muted: rgba(15, 42, 67, 0.65),
+  text-inverse: #ffffff,
+  border-soft: rgba(19, 145, 155, 0.25),
+  border-strong: rgba(15, 42, 67, 0.35),
+  accent-primary: #2cb1bc,
+  accent-primary-strong: #13919b,
+  accent-secondary: #0f2a43,
+  accent-tertiary: #ffb347,
+  status-info: #2cb1bc,
+  status-success: #1fbf90,
+  status-warning: #ffb347,
+  status-danger: #ff5a5f
+);
+
+[data-theme="blue-ocean"] {
+  --color-blue-ocean-1: #0f2a43;
+  --color-blue-ocean-2: #13919b;
+  --color-blue-ocean-3: #2cb1bc;
+  --color-blue-ocean-4: #f5f7fa;
+  --color-blue-ocean-5: #ffffff;
+
+  @include tokens.apply-theme($blue-ocean-tokens);
+}

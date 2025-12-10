@@ -1,0 +1,15 @@
+/* Cards: elevated surfaces for grouped content. */
+
+.doc-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+}
+
+.card-elevated {
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+}

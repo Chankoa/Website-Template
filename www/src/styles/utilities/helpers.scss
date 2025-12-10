@@ -1,0 +1,25 @@
+/* Utilities: lightweight helper classes for accessibility and quick tweaks. */
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.u-shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.u-text-muted {
+  color: var(--text-muted);
+}
+
+.u-border-soft {
+  border: 1px solid var(--border-soft);
+}
