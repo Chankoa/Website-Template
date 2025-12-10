@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="fr" data-theme="blue-ocean"> <head><meta charset="utf-8"><title>Accueil | Nom de l&#39;entreprise</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Texte de description du site pour les moteurs de recherche (150–160 caractères)."><link rel="canonical" href="https://www.exemple.com"><script>
+      (() => {
+        const STORAGE_KEY = "preferred-theme";
+        const paletteAttr = document.documentElement.getAttribute("data-theme");
+        const basePalette = paletteAttr && paletteAttr !== "dark" ? paletteAttr : "default";
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initial = (() => {
+          if (saved === "dark") return "dark";
+          if (saved && saved !== "default") return saved;
+          if (saved === "default" && basePalette !== "default") return basePalette;
+          if (!saved && basePalette !== "default") return basePalette;
+          return prefersDark ? "dark" : "default";
+        })();
+
+        document.documentElement.dataset.theme = initial;
+        document.documentElement.dataset.baseTheme = basePalette;
+      })();
+    </script><link rel="stylesheet" href="/_astro/a-propos.BwQjTMZ3.css"></head> <body class="bg-[var(--surface-bg)] text-[var(--text-default)]"> <header class="sticky top-0 z-30 backdrop-blur bg-[color-mix(in_srgb,var(--color-bg)_80%,white_20%)] border-b border-[var(--color-border)]"> <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-4"> <a href="/" class="flex items-center gap-2"> <div class="w-8 h-8 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-xs font-bold text-white shadow-md"> N </div> <div class="flex flex-col leading-tight"> <span class="text-sm font-semibold">Nom de l&#39;entreprise</span> <span class="text-xs text-[var(--color-muted)] hidden sm:inline"> Une phrase d’accroche claire et humaine. </span> </div> </a> <nav class="hidden md:flex items-center gap-4 text-sm text-[var(--text-muted)]"> <a href="/" class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Accueil </a><a href="/a-propos" class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> À propos </a><a href="/services" class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Services </a><a href="/guide-styles" class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Guide des styles </a><a href="/contact" class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Contact </a> </nav> <div class="flex items-center gap-2"> <button id="theme-toggle" class="inline-flex items-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--surface-card)] px-3 py-2 text-xs font-semibold text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-muted)] transition-colors" aria-label="Basculer le thème" type="button"> <span id="icon-sun" class="inline-flex">☀️</span> <span id="icon-moon" class="hidden">🌙</span> <span class="hidden sm:inline" id="theme-label">Mode clair</span> </button> <button id="drawer-open" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border-soft)] bg-[var(--surface-card)] text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-muted)]" aria-label="Ouvrir le menu" type="button">
+☰
+</button> </div> </div> </header> <div id="drawer-backdrop" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition md:hidden z-40"></div> <aside id="mobile-drawer" class="fixed inset-y-0 left-0 w-72 max-w-[80vw] bg-[var(--surface-card)] border-r border-[var(--border-soft)] shadow-2xl -translate-x-full transition-transform md:hidden z-50 flex flex-col p-6 gap-6" aria-label="Menu mobile"> <div class="flex items-center justify-between"> <div class="flex items-center gap-2"> <div class="w-8 h-8 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-xs font-bold text-white shadow-md"> N </div> <div class="flex flex-col leading-tight"> <span class="text-sm font-semibold text-[var(--text-strong)]">Nom de l&#39;entreprise</span> <span class="text-xs text-[var(--text-muted)]">Une phrase d’accroche claire et humaine.</span> </div> </div> <button id="drawer-close" class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] text-[var(--text-strong)] hover:bg-[var(--surface-card)]" aria-label="Fermer le menu" type="button">
+✕
+</button> </div> <nav class="flex flex-col gap-2 text-sm text-[var(--text-muted)]"> <a href="/" class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Accueil </a><a href="/a-propos" class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> À propos </a><a href="/services" class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Services </a><a href="/guide-styles" class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Guide des styles </a><a href="/contact" class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"> Contact </a> </nav> <div class="border-t border-[var(--border-soft)] pt-4"> <button id="theme-toggle-mobile" class="w-full inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-2 text-sm font-semibold text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-card)]" aria-label="Basculer le thème" type="button"> <span id="icon-sun-mobile" class="inline-flex">☀️</span> <span id="icon-moon-mobile" class="hidden">🌙</span> <span id="theme-label-mobile">Mode clair</span> </button> </div> </aside> <script>
+  (() => {
+    const root = document.documentElement;
+    const STORAGE_KEY = "preferred-theme";
+    const baseTheme = root.dataset.baseTheme || root.getAttribute("data-theme") || "default";
+    let palette = baseTheme === "dark" ? "default" : baseTheme;
+
+    const sun = document.getElementById("icon-sun");
+    const moon = document.getElementById("icon-moon");
+    const label = document.getElementById("theme-label");
+    const sunM = document.getElementById("icon-sun-mobile");
+    const moonM = document.getElementById("icon-moon-mobile");
+    const labelM = document.getElementById("theme-label-mobile");
+
+    const applyTheme = (mode) => {
+      const target = mode === "dark" ? "dark" : palette;
+      root.dataset.theme = target;
+      root.dataset.baseTheme = palette;
+      localStorage.setItem(STORAGE_KEY, target === "dark" ? "dark" : palette);
+      const isDark = target === "dark";
+      if (sun && moon) {
+        sun.classList.toggle("hidden", isDark);
+        moon.classList.toggle("hidden", !isDark);
+      }
+      if (label) label.textContent = isDark ? "Mode sombre" : "Mode clair";
+      if (sunM && moonM) {
+        sunM.classList.toggle("hidden", isDark);
+        moonM.classList.toggle("hidden", !isDark);
+      }
+      if (labelM) labelM.textContent = isDark ? "Mode sombre" : "Mode clair";
+    };
+
+    const initTheme = () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initial = (() => {
+        if (saved === "dark") return "dark";
+        if (saved && saved !== "default") {
+          palette = saved;
+          return palette;
+        }
+        if (saved === "default") return palette;
+        if (!saved && palette !== "default") return palette;
+        return prefersDark ? "dark" : palette;
+      })();
+      applyTheme(initial);
+    };
+    initTheme();
+
+    const desktopToggle = document.getElementById("theme-toggle");
+    const mobileToggle = document.getElementById("theme-toggle-mobile");
+    const toggleHandler = () => {
+      const isDark = root.dataset.theme === "dark";
+      applyTheme(isDark ? palette : "dark");
+    };
+    desktopToggle?.addEventListener("click", toggleHandler);
+    mobileToggle?.addEventListener("click", toggleHandler);
+
+    const drawer = document.getElementById("mobile-drawer");
+    const backdrop = document.getElementById("drawer-backdrop");
+    const openBtn = document.getElementById("drawer-open");
+    const closeBtn = document.getElementById("drawer-close");
+    const drawerLinks = drawer?.querySelectorAll("a");
+
+    const setDrawer = (open) => {
+      drawer?.classList.toggle("translate-x-0", open);
+      drawer?.classList.toggle("-translate-x-full", !open);
+      if (backdrop) {
+        backdrop.style.opacity = open ? "1" : "0";
+        backdrop.style.pointerEvents = open ? "auto" : "none";
+      }
+      document.body.classList.toggle("overflow-hidden", open);
+    };
+
+    openBtn?.addEventListener("click", () => setDrawer(true));
+    closeBtn?.addEventListener("click", () => setDrawer(false));
+    backdrop?.addEventListener("click", () => setDrawer(false));
+    drawerLinks?.forEach((link) => link.addEventListener("click", () => setDrawer(false)));
+  })();
+</script> <main class="min-h-[70vh]">  <section class="pt-16 pb-20"> <div class="max-w-5xl mx-auto px-4 grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center"> <div class="space-y-6"> <span class="badge-pill text-[var(--color-muted)]"> Sites vitrines modernes </span> <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"> Un site web clair, simple et efficace pour votre activité. </h1> <p class="text-base sm:text-lg text-[var(--color-muted)] max-w-xl"> Pas de blabla technique : un site qui rassure vos clients, présente vos services et facilite la prise de contact. </p> <div class="flex flex-wrap gap-4 items-center pt-2"> <a href="/contact" class="btn-primary"> Parler de votre projet </a> <span class="text-xs text-[var(--color-muted)]">
+Réponse rapide, sans engagement.
+</span> </div> </div> <div class="card-elevated p-6 md:p-8"> <p class="text-sm uppercase tracking-[0.2em] text-[var(--color-muted)] mb-4">
+À propos
+</p> <p class="text-sm sm:text-base leading-relaxed">
+Nous accompagnons vos projets avec une approche sur mesure, humaine et pragmatique :
+        un site clair, efficace, qui donne envie de vous contacter.
+</p> </div> </div> </section> <section class="py-16"> <div class="max-w-5xl mx-auto px-4 space-y-8"> <header class="max-w-2xl space-y-3"> <h2 class="text-2xl sm:text-3xl font-semibold"> Services </h2> <p class="text-[var(--color-muted)] text-sm sm:text-base"> Une offre simple et lisible, pensée pour mettre en valeur votre activité. </p> </header> <div class="grid gap-6 md:grid-cols-3"> <article class="card-elevated p-5 flex flex-col gap-3"> <h3 class="text-base font-semibold"> Création de site vitrine </h3> <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]"> Sur mesure </p> <p class="text-sm text-[var(--color-muted)]"> Un site clair, rapide et moderne, pensé pour mettre en valeur votre activité et faciliter la prise de contact. </p> </article><article class="card-elevated p-5 flex flex-col gap-3"> <h3 class="text-base font-semibold"> Refonte de site existant </h3> <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]"> Mise à jour </p> <p class="text-sm text-[var(--color-muted)]"> Nous modernisons votre site actuel en améliorant lisibilité, performance, ergonomie et référencement. </p> </article><article class="card-elevated p-5 flex flex-col gap-3"> <h3 class="text-base font-semibold"> Accompagnement &amp; conseils </h3> <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]"> Stratégie </p> <p class="text-sm text-[var(--color-muted)]"> Nous vous aidons à clarifier vos besoins et à définir un site adapté à vos objectifs réels. </p> </article> </div> </div> </section> <section class="py-16"> <div class="max-w-5xl mx-auto px-4 grid gap-10 md:grid-cols-2 items-start"> <div class="space-y-4"> <h2 class="text-2xl sm:text-3xl font-semibold"> À propos </h2> <p class="text-sm sm:text-base text-[var(--color-muted)] leading-relaxed"> Ici, vous pouvez présenter votre façon de travailler : approche humaine, écoute, simplicité, sobriété, efficacité. </p> </div> <div class="card-elevated p-6 space-y-3"> <h3 class="text-sm font-semibold">
+En résumé
+</h3> <ul class="text-sm text-[var(--color-muted)] space-y-2"> <li>• Une approche pédagogique et transparente</li><li>• Des sites simples à utiliser, agréables à parcourir</li><li>• Un interlocuteur unique, du brief à la mise en ligne</li> </ul> </div> </div> </section> <section class="py-16" id="contact"> <div class="max-w-5xl mx-auto px-4 grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start"> <div class="space-y-4"> <h2 class="text-2xl sm:text-3xl font-semibold"> Contact </h2> <p class="text-sm sm:text-base text-[var(--color-muted)]"> Un projet, une question, une envie de collaborer ? Laissez-nous un message. </p> <div class="space-y-1 text-sm text-[var(--color-muted)]"> <p>Tél. : <a href="tel:06 00 00 00 00" class="hover:text-[var(--color-accent)]">06 00 00 00 00</a></p> <p>Email : <a href="mailto:contact@exemple.com" class="hover:text-[var(--color-accent)]">contact@exemple.com</a></p> <p>Adresse : 12 rue de l’Exemple, 04000 Ville</p> </div> </div> <form name="contact" method="POST" data-netlify="true" class="card-elevated p-6 space-y-4 text-sm"> <input type="hidden" name="form-name" value="contact"> <div class="space-y-1"> <label for="name" class="font-medium">Nom</label> <input id="name" name="name" required class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"> </div> <div class="space-y-1"> <label for="email" class="font-medium">Email</label> <input id="email" name="email" type="email" required class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"> </div> <div class="space-y-1"> <label for="message" class="font-medium">Message</label> <textarea id="message" name="message" rows="4" required class="w-full rounded-md border border-[var(--color-border)] px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"></textarea> </div> <button type="submit" class="btn-primary w-full justify-center">
+Envoyer
+</button> </form> </div> </section>  </main> <footer class="border-t border-[var(--color-border)] mt-16"> <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-[var(--color-muted)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> <p>
+© 2025 Nom de l&#39;entreprise. Tous droits réservés.
+</p> <div class="flex flex-wrap gap-3"> <a href="tel:06 00 00 00 00" class="hover:text-[var(--color-accent)]"> 06 00 00 00 00 </a> <a href="mailto:contact@exemple.com" class="hover:text-[var(--color-accent)]"> contact@exemple.com </a> </div> </div> </footer> </body></html>
