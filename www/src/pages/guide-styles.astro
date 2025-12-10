@@ -46,6 +46,7 @@ const sections = [
         <section id="couleurs" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Couleurs & thèmes</h2>
           <p class="text-[var(--text-muted)]">Les variables sémantiques sont exposées via le design system. Activez Blue Ocean en ajoutant l’attribut <code>data-theme="blue-ocean"</code> sur <code>&lt;html&gt;</code> ou <code>&lt;body&gt;</code>.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichiers : <code>src/styles/design-system/_semantic-tokens.scss</code> et <code>src/styles/design-system/themes/_blue-ocean.scss</code>.</p>
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="doc-card">
               <p class="text-sm font-semibold mb-2">Activer Blue Ocean</p>
@@ -63,6 +64,7 @@ const sections = [
         <section id="typo" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Typographie</h2>
           <p class="text-[var(--text-muted)]">Police et échelles via <code>--font-body</code> et <code>--font-heading</code>. Ajustez dans <code>_foundations.scss</code> ou surchargez localement.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichier : <code>src/styles/design-system/_foundations.scss</code>.</p>
           <div class="doc-card space-y-3">
             <div class="flex flex-col gap-1">
               <span class="text-sm text-[var(--text-muted)]">Heading</span>
@@ -79,6 +81,7 @@ const sections = [
         <section id="boutons" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Boutons</h2>
           <p class="text-[var(--text-muted)]">Classe utilitaire <code>.btn-primary</code> (SCSS) basée sur <code>--color-accent</code> et <code>--shadow-soft</code>.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichier : <code>src/styles/components/_buttons.scss</code>.</p>
           <div class="doc-card space-y-3">
             <div class="flex gap-3 items-center flex-wrap">
               <a class="btn-primary" href="#">Appel à l’action</a>
@@ -91,6 +94,7 @@ const sections = [
         <section id="cards" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Cards</h2>
           <p class="text-[var(--text-muted)]">Classes <code>.doc-card</code> et <code>.card-elevated</code> pour les blocs de contenu.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichier : <code>src/styles/components/_cards.scss</code>.</p>
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="doc-card">
               <p class="font-semibold text-[var(--text-strong)]">Card par défaut</p>
@@ -107,6 +111,7 @@ const sections = [
         <section id="layout" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Layout & containers</h2>
           <p class="text-[var(--text-muted)]">Helpers de structure : <code>.app-shell</code>, <code>.main-content</code>, <code>.container</code>.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichiers : <code>src/styles/layout/_base.scss</code> et <code>src/styles/layout/_containers.scss</code>.</p>
           <div class="doc-card space-y-2">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<div class="app-shell">\n  <main class="main-content">…</main>\n</div>`}</code></pre>
             <p class="text-sm text-[var(--text-muted)]">Utilisez <code>.container</code> pour limiter la largeur : max 1120px.</p>
@@ -116,6 +121,7 @@ const sections = [
         <section id="utils" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Utilitaires</h2>
           <p class="text-[var(--text-muted)]">Helpers rapides pour l’accessibilité et le style.</p>
+          <p class="text-xs text-[var(--text-muted)]">Fichier : <code>src/styles/utilities/_helpers.scss</code>.</p>
           <div class="doc-card space-y-2">
             <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
               <li><code>.u-sr-only</code> : texte uniquement pour lecteurs d’écran.</li>
@@ -130,6 +136,7 @@ const sections = [
         <section id="custom" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Personnalisation</h2>
           <p class="text-[var(--text-muted)]">Créez vos propres thèmes en partant des tokens. Exemple d’un thème “brand”.</p>
+          <p class="text-xs text-[var(--text-muted)]">Ajoutez votre fichier de thème dans <code>src/styles/design-system/themes/</code> (ex. <code>_brand.scss</code>).</p>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`@use "../styles/design-system/semantic-tokens" as tokens;\n\n$brand-tokens: (\n  surface-bg: #fef9f5,\n  surface-card: #ffffff,\n  surface-muted: #ffeede,\n  text-strong: #2b1a14,\n  text-default: #3c241c,\n  text-muted: rgba(43,26,20,0.7),\n  border-soft: #f5d7c3,\n  border-strong: #eabf9b,\n  accent-primary: #ff7a59,\n  accent-primary-strong: #e8643f,\n  accent-secondary: #2b1a14,\n  accent-tertiary: #ffd580,\n  status-info: #2cb1bc,\n  status-success: #1fbf90,\n  status-warning: #ffb347,\n  status-danger: #ff5a5f\n);\n\n[data-theme="brand"] {\n  @include tokens.apply-theme($brand-tokens);\n}`}</code></pre>
             <p class="text-sm text-[var(--text-muted)]">Ensuite, appliquez <code>data-theme="brand"</code> sur <code>&lt;body&gt;</code> ou <code>&lt;html&gt;</code>.</p>
@@ -166,6 +173,56 @@ const sections = [
 
     sectionsEls.forEach((section) => observer.observe(section));
   }
+
+  // Enhance code blocks: add header with language + copy button
+  const codeBlocks = Array.from(document.querySelectorAll('pre[class*="language-"]'));
+  codeBlocks.forEach((pre) => {
+    const langMatch = pre.className.match(/language-([a-z0-9]+)/i);
+    const lang = langMatch ? langMatch[1] : "code";
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-block";
+    wrapper.classList.add(`code-block--${lang.toLowerCase()}`);
+
+    const header = document.createElement("div");
+    header.className = "code-block__header";
+    const label = document.createElement("span");
+    label.className = "code-block__lang";
+    label.textContent = lang.toUpperCase();
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "code-block__copy";
+    btn.setAttribute("aria-label", "Copier le code");
+    btn.textContent = "Copier";
+
+    header.appendChild(label);
+    header.appendChild(btn);
+
+    const parent = pre.parentElement;
+    parent.replaceChild(wrapper, pre);
+    wrapper.appendChild(header);
+    wrapper.appendChild(pre);
+
+    btn.addEventListener("click", async () => {
+      const codeEl = pre.querySelector("code") || pre;
+      const text = codeEl.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = "Copié !";
+        btn.classList.add("is-success");
+        setTimeout(() => {
+          btn.textContent = "Copier";
+          btn.classList.remove("is-success");
+        }, 1600);
+      } catch (e) {
+        btn.textContent = "Erreur";
+        btn.classList.add("is-error");
+        setTimeout(() => {
+          btn.textContent = "Copier";
+          btn.classList.remove("is-error");
+        }, 1600);
+      }
+    });
+  });
 </script>
 
 <style is:global>
@@ -178,8 +235,8 @@ const sections = [
     line-height: 1.5;
   }
   pre[class*="language-"] {
-    padding: 0.9rem 1rem;
-    border-radius: 0.75rem;
+    padding: calc(var(--space-3) * 1.2) var(--space-4);
+    border-radius: 0 0 0.75rem 0.75rem;
     overflow: auto;
     border: 1px solid rgba(148, 163, 184, 0.25);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
@@ -191,7 +248,7 @@ const sections = [
   code:not([class*="language-"]) {
     background: rgba(15, 23, 42, 0.08);
     color: var(--text-strong);
-    padding: 0.15rem 0.35rem;
+    padding: calc(var(--space-1) * 0.6) calc(var(--space-2) * 0.7);
     border-radius: 0.35rem;
     font-size: 0.85em;
     border: 1px solid rgba(148, 163, 184, 0.35);
@@ -218,6 +275,93 @@ const sections = [
   .token.keyword, .token.rule { color: #f59e0b; }
   .token.function, .token.class-name { color: #c7d2fe; }
   .token.operator { color: #fca5a5; }
+
+  /* Code block chrome */
+  .code-block {
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 0.9rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) calc(var(--space-3) * 1.13);
+    background: var(--surface-muted);
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .code-block__lang {
+    font-weight: 700;
+  }
+  .code-block__copy {
+    border: 1px solid var(--border-soft);
+    background: var(--surface-card);
+    color: var(--text-strong);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: calc(var(--space-1) * 1.2) calc(var(--space-3) * 0.93);
+    border-radius: 999px;
+    transition: all 0.18s var(--ease-standard);
+    cursor: pointer;
+  }
+  .code-block__copy:hover {
+    background: var(--surface-muted);
+  }
+  .code-block__copy.is-success {
+    color: #16a34a;
+    border-color: rgba(22, 163, 74, 0.35);
+    background: rgba(22, 163, 74, 0.08);
+  }
+  .code-block__copy.is-error {
+    color: #e11d48;
+    border-color: rgba(225, 29, 72, 0.35);
+    background: rgba(225, 29, 72, 0.08);
+  }
+
+  /* Language accents */
+  .code-block--html .code-block__lang { color: #f97316; }
+  .code-block--css .code-block__lang { color: #3b82f6; }
+  .code-block--scss .code-block__lang { color: #ec4899; }
+  .code-block--js .code-block__lang { color: #eab308; }
+  .code-block--ts .code-block__lang { color: #38bdf8; }
+  .code-block--json .code-block__lang { color: #22c55e; }
+
+  /* Dark mode chrome */
+  :root[data-theme="dark"] .code-block {
+    background: #0b1321;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+  }
+  :root[data-theme="dark"] .code-block__header {
+    background: #0f172a;
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+  }
+  :root[data-theme="dark"] .code-block__copy {
+    background: #111c30;
+    color: #e5e7eb;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  :root[data-theme="dark"] .code-block__copy:hover {
+    background: #17233a;
+  }
+  :root[data-theme="dark"] .code-block__copy.is-success {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.35);
+    background: rgba(74, 222, 128, 0.1);
+  }
+  :root[data-theme="dark"] .code-block__copy.is-error {
+    color: #f43f5e;
+    border-color: rgba(244, 63, 94, 0.35);
+    background: rgba(244, 63, 94, 0.1);
+  }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" defer></script>
