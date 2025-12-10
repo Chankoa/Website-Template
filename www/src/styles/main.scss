@@ -1,14 +1,13 @@
 @use "./design-system/index";
-
-/*
- * File: main.scss
- * Purpose: Entry point for design tokens + scoped SCSS (layout, components, utilities). Tailwind is loaded separately via tailwind.css so these rules can override it.
- * Updated: 2025-12-10
- */
-
 @use "./layout/base";
 @use "./layout/containers";
 @use "./components/buttons";
 @use "./components/badges";
 @use "./components/cards";
 @use "./utilities/helpers";
+
+/*
+ * File: main.scss
+ * Purpose: Entry point for design tokens + scoped SCSS (layout, components, utilities). Tailwind is loaded separately via tailwind.css so these rules can override it.
+ * Updated: 2025-12-10
+ */

@@ -26,6 +26,7 @@ $blue-ocean-tokens: (
   status-danger: #ff5a5f
 );
 
+[data-theme="blue-ocean"][data-base-theme="blue-ocean"],
 [data-theme="blue-ocean"] {
   --color-blue-ocean-1: #0f2a43;
   --color-blue-ocean-2: #13919b;
@@ -34,4 +35,46 @@ $blue-ocean-tokens: (
   --color-blue-ocean-5: #ffffff;
 
   @include tokens.apply-theme($blue-ocean-tokens);
+
+  /* expose aliases within the themed scope to ensure components pick the updated values */
+  --color-bg: var(--surface-bg);
+  --color-bg-alt: var(--surface-card);
+  --color-text: var(--text-default);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent-primary);
+  --color-border: var(--border-soft);
+  --shadow-soft: var(--shadow-md);
+}
+
+/* Dark mode variant that keeps the Blue Ocean palette (uses data-base-theme to disambiguate) */
+$blue-ocean-dark-tokens: (
+  surface-bg: #081424,
+  surface-card: #0f1f33,
+  surface-muted: #132840,
+  text-strong: #e6f1fb,
+  text-default: #c8d8e8,
+  text-muted: rgba(200, 216, 232, 0.75),
+  text-inverse: #06101c,
+  border-soft: rgba(44, 177, 188, 0.25),
+  border-strong: rgba(44, 177, 188, 0.45),
+  accent-primary: #2cb1bc,
+  accent-primary-strong: #17a1ad,
+  accent-secondary: #7fc9ec,
+  accent-tertiary: #ffb347,
+  status-info: #4cd6e0,
+  status-success: #46cfa4,
+  status-warning: #ffc76d,
+  status-danger: #ff7a85
+);
+
+[data-theme="dark"][data-base-theme="blue-ocean"] {
+  @include tokens.apply-theme($blue-ocean-dark-tokens);
+
+  --color-bg: var(--surface-bg);
+  --color-bg-alt: var(--surface-card);
+  --color-text: var(--text-default);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent-primary);
+  --color-border: var(--border-soft);
+  --shadow-soft: var(--shadow-md);
 }
