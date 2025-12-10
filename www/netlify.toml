@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[context.production.environment]
+  # Remplace par ton domaine final, incluant le sous-chemin /www si nécessaire
+  SITE = "https://example.com/www"
+
+[context.deploy-preview.environment]
+  # Optionnel : Netlify injecte l'URL de prévisualisation, adapte si besoin
+  SITE = "https://deploy-preview.example.netlify.app/www"
