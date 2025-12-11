@@ -1,0 +1,50 @@
+@use "../design-system/breakpoints" as bp;
+
+/* Visibility rules for header navigation/drawer */
+.desktop-nav {
+  display: none;
+}
+
+.drawer-toggle {
+  display: inline-flex;
+}
+
+#mobile-drawer.drawer,
+#drawer-backdrop {
+  display: block;
+}
+
+#mobile-drawer.drawer {
+  transform: translateX(-100%);
+  transition: transform 220ms var(--ease-standard, ease);
+}
+
+#mobile-drawer.drawer.is-open {
+  transform: translateX(0);
+}
+
+#drawer-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-standard, ease);
+}
+
+#drawer-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@include bp.respond-min(bp.$bp-lg) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .drawer-toggle {
+    display: none;
+  }
+
+  #mobile-drawer.drawer,
+  #drawer-backdrop {
+    display: none;
+  }
+}

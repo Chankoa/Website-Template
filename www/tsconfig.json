@@ -9,6 +9,11 @@
     "noEmit": true,
     "types": [
       "astro/client"
+    ],
+    "typeRoots": [
+      "./src/types",
+      "./node_modules",
+      "./node_modules/@types"
     ]
   }
 }

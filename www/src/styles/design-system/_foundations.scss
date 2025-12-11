@@ -1,5 +1,7 @@
 /* Foundations: spacing, radii, shadows, and typography tokens. */
 
+@use "./breakpoints";
+
 :root {
   /* spacing scale */
   --space-0: 0;
@@ -31,6 +33,7 @@
   --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-heading: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  --text-xs: 0.725rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;

@@ -1,0 +1,22 @@
+/* Breakpoints tokens: SCSS variables + CSS custom properties + helper mixin */
+
+// SCSS source-of-truth
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+// Expose as CSS variables for runtime usage if needed
+:root {
+  --bp-sm: #{$bp-sm};
+  --bp-md: #{$bp-md};
+  --bp-lg: #{$bp-lg};
+  --bp-xl: #{$bp-xl};
+}
+
+// Helper mixin for min-width queries
+@mixin respond-min($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}

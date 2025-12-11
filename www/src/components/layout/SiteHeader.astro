@@ -1,5 +1,7 @@
 ---
 import { siteConfig } from "../../data/site-config";
+import "../../styles/components/navigation.scss";
+import "../../styles/components/site-header.scss";
 ---
 
 <header class="sticky top-0 z-30 backdrop-blur bg-[color-mix(in_srgb,var(--color-bg)_80%,white_20%)] border-b border-[var(--color-border)]">
@@ -16,11 +18,11 @@ import { siteConfig } from "../../data/site-config";
       </div>
     </a>
 
-    <nav class="hidden md:flex items-center gap-4 text-sm text-[var(--text-muted)]">
+    <nav class="desktop-nav nav items-center gap-4 text-sm text-[var(--text-muted)]">
       {siteConfig.navigation.map((item) => (
         <a
           href={item.href}
-          class="px-3 py-1 rounded-full hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"
+          class="nav-link px-3 py-1 rounded-full transition-colors"
         >
           {item.label}
         </a>
@@ -41,7 +43,7 @@ import { siteConfig } from "../../data/site-config";
 
       <button
         id="drawer-open"
-        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border-soft)] bg-[var(--surface-card)] text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-muted)]"
+        class="drawer-toggle inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border-soft)] bg-[var(--surface-card)] text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-muted)]"
         aria-label="Ouvrir le menu"
         type="button"
       >
@@ -58,7 +60,7 @@ import { siteConfig } from "../../data/site-config";
 
 <aside
   id="mobile-drawer"
-  class="fixed inset-y-0 left-0 w-72 max-w-[80vw] bg-[var(--surface-card)] border-r border-[var(--border-soft)] shadow-2xl -translate-x-full transition-transform md:hidden z-50 flex flex-col p-6 gap-6"
+  class="drawer fixed inset-y-0 left-0 w-72 max-w-[80vw] bg-[var(--surface-card)] border-r border-[var(--border-soft)] shadow-2xl z-50 flex flex-col p-6 gap-6"
   aria-label="Menu mobile"
 >
   <div class="flex items-center justify-between">
@@ -81,11 +83,11 @@ import { siteConfig } from "../../data/site-config";
     </button>
   </div>
 
-  <nav class="flex flex-col gap-2 text-sm text-[var(--text-muted)]">
+  <nav class="flex flex-col gap-2 text-sm text-[var(--text-muted)] nav nav--stacked">
     {siteConfig.navigation.map((item) => (
       <a
         href={item.href}
-        class="px-3 py-2 rounded-md hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)] transition-colors"
+        class="nav-link px-3 py-2 rounded-md transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)]"
       >
         {item.label}
       </a>
@@ -171,11 +173,14 @@ import { siteConfig } from "../../data/site-config";
     const drawerLinks = drawer?.querySelectorAll("a");
 
     const setDrawer = (open) => {
-      drawer?.classList.toggle("translate-x-0", open);
-      drawer?.classList.toggle("-translate-x-full", !open);
+      if (drawer) {
+        drawer.style.transform = open ? "translateX(0)" : "translateX(-100%)";
+        drawer.classList.toggle("is-open", open);
+      }
       if (backdrop) {
         backdrop.style.opacity = open ? "1" : "0";
         backdrop.style.pointerEvents = open ? "auto" : "none";
+        backdrop.classList.toggle("is-open", open);
       }
       document.body.classList.toggle("overflow-hidden", open);
     };
@@ -184,5 +189,8 @@ import { siteConfig } from "../../data/site-config";
     closeBtn?.addEventListener("click", () => setDrawer(false));
     backdrop?.addEventListener("click", () => setDrawer(false));
     drawerLinks?.forEach((link) => link.addEventListener("click", () => setDrawer(false)));
+
+    // Initialize closed state
+    setDrawer(false);
   })();
 </script>

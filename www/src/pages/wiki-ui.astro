@@ -1,0 +1,190 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import "../styles/components/cards.scss";
+import "../styles/components/code-blocks.scss";
+
+const sections = [
+  { id: "fondations", label: "Fondations" },
+  { id: "themes", label: "Thèmes" },
+  { id: "composants", label: "Composants" },
+  { id: "accessibilite", label: "Accessibilité" },
+  { id: "contenus", label: "Contenus" },
+  { id: "performance", label: "Performance" },
+  { id: "schema", label: "Schéma d'ensemble" },
+];
+---
+
+<Layout title="Wiki UI" description="Bonnes pratiques de design system et implémentation front dans ce projet.">
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
+      <aside class="md:sticky md:top-20 md:self-start md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-4 shadow-sm">
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3">Navigation</p>
+        <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="wiki-nav">
+          {sections.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-target={item.id}
+              class="px-3 py-2 whitespace-nowrap rounded-md text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-muted)] transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-14 md:col-start-2">
+        <header class="space-y-4">
+          <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Wiki UI</p>
+          <h1 class="text-3xl font-bold text-[var(--text-strong)]">Guide pratique</h1>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            Référence rapide pour travailler avec le design system, les thèmes, les composants et l’accessibilité dans ce projet Astro + Tailwind.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="badge-pill">Design tokens</span>
+            <span class="badge-pill">Thèmes</span>
+            <span class="badge-pill">Accessibilité</span>
+          </div>
+        </header>
+
+        <section id="fondations" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Fondations</h2>
+          <p class="text-[var(--text-muted)]">
+            Les bases (espacements, rayons, ombres, typos) sont définies dans <code>src/styles/design-system/_foundations.scss</code>. Les alias sont exposés via
+            <code>design-system/index.scss</code> et utilisables partout (SCSS, Tailwind arbitraire, inline).
+          </p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`:root {
+  --space-3: 0.75rem;
+  --radius-lg: 0.75rem;
+  --shadow-md: 0 8px 20px rgba(15, 42, 67, 0.15);
+  --font-body: "Inter", system-ui, sans-serif;
+}`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Modifie ce fichier pour ajuster la grille de spacing ou les rayons. Les composants y piochent leurs valeurs.</p>
+          </div>
+        </section>
+
+        <section id="themes" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Thèmes</h2>
+          <p class="text-[var(--text-muted)]">
+            Les rôles couleur sont dans <code>_semantic-tokens.scss</code>. Le thème Blue Ocean est dans <code>themes/_blue-ocean.scss</code>, avec une variante dark liée à
+            <code>data-base-theme</code>.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="doc-card space-y-2">
+              <p class="text-sm font-semibold">Activer un thème</p>
+              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<html data-theme="blue-ocean">`}</code></pre>
+              <p class="text-sm text-[var(--text-muted)]">Ou appliquez <code>data-theme="brand"</code> si vous ajoutez votre propre fichier dans <code>themes/</code>.</p>
+            </div>
+            <div class="doc-card space-y-2">
+              <p class="text-sm font-semibold">Créer un thème</p>
+              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`@use "../styles/design-system/semantic-tokens" as tokens;
+
+$brand-tokens: (
+  surface-bg: #fdf7ff,
+  surface-card: #ffffff,
+  surface-muted: #f1e9ff,
+  text-strong: #1a1024,
+  text-default: #2b1a3a,
+  text-muted: rgba(26,16,36,0.65),
+  border-soft: #e1d6f7,
+  border-strong: #c8b7ec,
+  accent-primary: #7c3aed,
+  accent-primary-strong: #5b21b6,
+  accent-secondary: #1a1024,
+  accent-tertiary: #f59e0b,
+  status-info: #22cbdc,
+  status-success: #22c55e,
+  status-warning: #f59e0b,
+  status-danger: #ef4444
+);
+
+[data-theme="brand"] {
+  @include tokens.apply-theme($brand-tokens);
+}
+`}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="composants" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Composants</h2>
+          <p class="text-[var(--text-muted)]">Les composants SCSS vivent dans <code>src/styles/components/</code>. Utilise les tokens pour rester aligné avec le DS.</p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`.card-elevated {
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+}`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Ajoute un nouveau composant dans un fichier dédié (ex. <code>_alerts.scss</code>) et importe-le dans <code>styles/main.scss</code>.</p>
+          </div>
+        </section>
+
+        <section id="accessibilite" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Accessibilité</h2>
+          <p class="text-[var(--text-muted)]">Focus visibles, contrastes et contenu accessible. Utilise les couleurs sémantiques et ajoute les rôles ARIA si nécessaire.</p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+}`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Conserve des focus nets même en dark mode : les accents sont recalculés par le thème actif.</p>
+          </div>
+        </section>
+
+        <section id="contenus" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Contenus & typo</h2>
+          <p class="text-[var(--text-muted)]">Base typographique dans <code>layout/_base.scss</code>. Utilise <code>--text-strong</code> et <code>--text-muted</code> pour les contrastes.</p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<p class="text-[var(--text-muted)] leading-relaxed">
+  Les textes secondaires utilisent --text-muted pour garder un contraste suffisant.
+</p>`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Ajuste la hiérarchie typo (h1–h6) dans <code>layout/_base.scss</code> si besoin.</p>
+          </div>
+        </section>
+
+        <section id="performance" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Performance & build</h2>
+          <p class="text-[var(--text-muted)]">Astro produit du HTML statique; Tailwind est purgé au build. Évite les classes dynamiques non listées pour ne pas casser la purge.</p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-js"><code class="language-js">{`// Exemple de classe sûre pour la purge
+const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non listés
+`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Utilise des valeurs arbitraires Tailwind seulement si nécessaires (<code>bg-[var(--surface-card)]</code>), et garde-les en dur dans le markup.</p>
+          </div>
+        </section>
+
+        <section id="schema" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Schéma d'ensemble</h2>
+          <p class="text-[var(--text-muted)]">Vue synthétique du flux de styles et de l'empilement Tailwind + SCSS design system.</p>
+          <div class="doc-card space-y-3">
+            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-text"><code class="language-text">{`Layout.astro
+├─ import tailwind.css (utilities, reset)
+└─ import main.scss (design system + composants)
+     ├─ design-system/index.scss
+     │    ├─ _foundations.scss        (spacing, radii, ombres, typos)
+     │    ├─ _semantic-tokens.scss    (rôles couleur + mixin apply-theme)
+     │    └─ themes/_blue-ocean.scss  (palette + variante dark liée à baseTheme)
+     ├─ layout/_base.scss, _containers.scss
+     ├─ components/_buttons.scss, _badges.scss, _cards.scss
+     └─ utilities/_helpers.scss
+
+Pages (.astro)
+├─ Utilisent Tailwind pour le layout rapide
+└─ Peuvent consommer les variables CSS du DS
+     (ex. bg-[var(--surface-card)] ou padding via tokens)`}</code></pre>
+            <p class="text-sm text-[var(--text-muted)]">Active un thème avec <code>data-theme</code> et un mode sombre lié au thème via <code>data-base-theme</code>.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script type="module">
+  import "/src/scripts/prism-client.ts";
+  import { initWikiPage } from "/src/scripts/wiki-shared.ts";
+  initWikiPage("#wiki-nav");
+</script>

@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Nom de l'entreprise",
-  baseline: "Une phrase d’accroche claire et humaine.",
+  name: "RE[Code]",
+  baseline: "Un template pour votre site web.",
   lang: "fr",
   url: "https://www.exemple.com",
   meta: {
@@ -21,6 +21,7 @@ export const siteConfig = {
     { label: "Accueil", href: "/" },
     { label: "À propos", href: "/a-propos" },
     { label: "Services", href: "/services" },
+    { label: "Wiki UI", href: "/wiki-ui" },
     { label: "Guide des styles", href: "/guide-styles" },
     { label: "Contact", href: "/contact" },
   ],
