@@ -1,0 +1,32 @@
+.note-callout {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px 12px 16px;
+  margin-bottom: var(--space-5);
+  border-left: 4px solid var(--accent-primary);
+  background: color-mix(in srgb, var(--surface-card) 80%, var(--surface-muted) 20%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+@supports not (background: color-mix(in srgb, white 90%, black 10%)) {
+  .note-callout {
+    background: var(--surface-muted);
+  }
+}
+
+.note-callout__title {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.note-callout__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}

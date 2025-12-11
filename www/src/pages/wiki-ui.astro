@@ -2,6 +2,7 @@
 import Layout from "../components/layout/Layout.astro";
 import "../styles/components/cards.scss";
 import "../styles/components/code-blocks.scss";
+import "../styles/components/note-callout.scss";
 
 const sections = [
   { id: "fondations", label: "Fondations" },
@@ -52,6 +53,11 @@ const sections = [
             Les bases (espacements, rayons, ombres, typos) sont définies dans <code>src/styles/design-system/_foundations.scss</code>. Les alias sont exposés via
             <code>design-system/index.scss</code> et utilisables partout (SCSS, Tailwind arbitraire, inline).
           </p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Fondations : <code>src/styles/design-system/_foundations.scss</code></p>
+            <p class="note-callout__text">Exports : <code>src/styles/design-system/index.scss</code></p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`:root {
   --space-3: 0.75rem;
@@ -69,6 +75,11 @@ const sections = [
             Les rôles couleur sont dans <code>_semantic-tokens.scss</code>. Le thème Blue Ocean est dans <code>themes/_blue-ocean.scss</code>, avec une variante dark liée à
             <code>data-base-theme</code>.
           </p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Tokens sémantiques : <code>src/styles/design-system/_semantic-tokens.scss</code></p>
+            <p class="note-callout__text">Thème Blue Ocean : <code>src/styles/design-system/themes/_blue-ocean.scss</code></p>
+          </div>
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="doc-card space-y-2">
               <p class="text-sm font-semibold">Activer un thème</p>
@@ -109,6 +120,11 @@ $brand-tokens: (
         <section id="composants" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Composants</h2>
           <p class="text-[var(--text-muted)]">Les composants SCSS vivent dans <code>src/styles/components/</code>. Utilise les tokens pour rester aligné avec le DS.</p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Composants SCSS : <code>src/styles/components/</code></p>
+            <p class="note-callout__text">Import global : <code>src/styles/main.scss</code></p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`.card-elevated {
   border-radius: var(--radius-lg);
@@ -124,6 +140,11 @@ $brand-tokens: (
         <section id="accessibilite" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Accessibilité</h2>
           <p class="text-[var(--text-muted)]">Focus visibles, contrastes et contenu accessible. Utilise les couleurs sémantiques et ajoute les rôles ARIA si nécessaire.</p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Styles de base : <code>src/styles/layout/_base.scss</code></p>
+            <p class="note-callout__text">Tokens d’accent : <code>src/styles/design-system/_semantic-tokens.scss</code></p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent-primary);
@@ -137,6 +158,10 @@ $brand-tokens: (
         <section id="contenus" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Contenus & typo</h2>
           <p class="text-[var(--text-muted)]">Base typographique dans <code>layout/_base.scss</code>. Utilise <code>--text-strong</code> et <code>--text-muted</code> pour les contrastes.</p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Typo & corps : <code>src/styles/layout/_base.scss</code></p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<p class="text-[var(--text-muted)] leading-relaxed">
   Les textes secondaires utilisent --text-muted pour garder un contraste suffisant.
@@ -148,6 +173,11 @@ $brand-tokens: (
         <section id="performance" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Performance & build</h2>
           <p class="text-[var(--text-muted)]">Astro produit du HTML statique; Tailwind est purgé au build. Évite les classes dynamiques non listées pour ne pas casser la purge.</p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Config Tailwind : <code>tailwind.config.cjs</code></p>
+            <p class="note-callout__text">Config Astro : <code>astro.config.mjs</code></p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-js"><code class="language-js">{`// Exemple de classe sûre pour la purge
 const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non listés
@@ -159,6 +189,11 @@ const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non 
         <section id="schema" class="scroll-mt-24 space-y-4" data-spy-section>
           <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Schéma d'ensemble</h2>
           <p class="text-[var(--text-muted)]">Vue synthétique du flux de styles et de l'empilement Tailwind + SCSS design system.</p>
+          <div class="note-callout">
+            <p class="note-callout__title">Où ça se trouve ?</p>
+            <p class="note-callout__text">Cette page : <code>src/pages/wiki-ui.astro</code></p>
+            <p class="note-callout__text">Schéma maintenu dans ce fichier</p>
+          </div>
           <div class="doc-card space-y-3">
             <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-text"><code class="language-text">{`Layout.astro
 ├─ import tailwind.css (utilities, reset)
