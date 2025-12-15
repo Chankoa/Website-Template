@@ -13,6 +13,7 @@ interface Props {
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const metaDescription = description ?? siteConfig.meta.description;
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
 ---
 
 <html lang={siteConfig.lang} data-theme="blue-ocean">
@@ -21,7 +22,7 @@ const metaDescription = description ?? siteConfig.meta.description;
     <title>{pageTitle}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={metaDescription} />
-    <link rel="canonical" href={siteConfig.url} />
+    <link rel="canonical" href={canonicalUrl} />
     <script is:inline>
       (() => {
         const STORAGE_KEY = "preferred-theme";

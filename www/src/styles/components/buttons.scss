@@ -7,7 +7,7 @@
   padding: var(--space-3) var(--space-5);
   font-size: 0.875rem;
   font-weight: 600;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--color-accent);
   color: #fff;
   box-shadow: var(--shadow-soft);
@@ -18,4 +18,8 @@
 
 .btn-primary:hover {
   filter: brightness(1.05);
+}
+
+.btn-primary.is-rounded {
+  border-radius: var(--radius-pill);
 }

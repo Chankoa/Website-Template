@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr" data-theme="blue-ocean"> <head><meta charset="utf-8"><title>Wiki UI | RE[Code]</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Bonnes pratiques de design system et implémentation front dans ce projet."><link rel="canonical" href="https://www.exemple.com"><script>
+<!DOCTYPE html><html lang="fr" data-theme="blue-ocean"> <head><meta charset="utf-8"><title>Wiki UI | RE[Code]</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Bonnes pratiques de design system et implémentation front dans ce projet."><link rel="canonical" href="https://www.exemple.com/wiki-ui/"><script>
       (() => {
         const STORAGE_KEY = "preferred-theme";
         const paletteAttr = document.documentElement.getAttribute("data-theme");
@@ -175,8 +175,4 @@ Pages (.astro)
 └─ Peuvent consommer les variables CSS du DS
      (ex. bg-[var(--surface-card)] ou padding via tokens)</code></pre> <p class="text-sm text-[var(--text-muted)]">Active un thème avec <code>data-theme</code> et un mode sombre lié au thème via <code>data-base-theme</code>.</p> </div> </section> </div> </div> </section>  </main> <footer class="border-t border-[var(--color-border)] mt-16"> <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-[var(--color-muted)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between"> <p>
 © 2025 RE[Code]. Tous droits réservés.
-</p> <div class="flex flex-wrap gap-3"> <a href="tel:06 00 00 00 00" class="hover:text-[var(--color-accent)]"> 06 00 00 00 00 </a> <a href="mailto:contact@exemple.com" class="hover:text-[var(--color-accent)]"> contact@exemple.com </a> </div> </div> </footer> </body></html> <script type="module">
-  import "/src/scripts/prism-client.ts";
-  import { initWikiPage } from "/src/scripts/wiki-shared.ts";
-  initWikiPage("#wiki-nav");
-</script>
+</p> <div class="flex flex-wrap gap-3"> <a href="tel:06 00 00 00 00" class="hover:text-[var(--color-accent)]"> 06 00 00 00 00 </a> <a href="mailto:contact@exemple.com" class="hover:text-[var(--color-accent)]"> contact@exemple.com </a> </div> </div> </footer> </body></html> <script type="module" src="data:video/mp2t;base64,aW1wb3J0IHsgaW5pdFdpa2lQYWdlIH0gZnJvbSAiLi93aWtpLXNoYXJlZCI7DQoNCmluaXRXaWtpUGFnZSgiI3dpa2ktbmF2Iik7DQo="></script>

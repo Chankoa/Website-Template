@@ -1,0 +1,81 @@
+---
+
+---
+
+<style>
+
+.theme-toggle {
+    width: var(--space-6);
+    height: var(--space-6);
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-soft);
+    background: var(--surface-muted);
+    color: var(--text-default);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    gap: var(--space-1);
+    transition:
+        background-color 160ms var(--ease-standard, ease),
+        border-color 160ms var(--ease-standard, ease),
+        color 160ms var(--ease-standard, ease),
+        box-shadow 160ms var(--ease-standard, ease);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    background: var(--surface-card);
+    border-color: var(--border-strong);
+    color: var(--accent-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 25%, transparent);
+    outline: none;
+}
+
+.theme-toggle:active {
+    background: var(--surface-muted);
+    border-color: var(--accent-primary-strong);
+}
+
+.theme-toggle[aria-pressed="true"] {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary-strong);
+    color: var(--text-inverse);
+}
+
+.theme-toggle__icon {
+    display: grid;
+    place-items: center;
+}
+
+.theme-toggle__icon.hidden {
+    display: none;
+}
+
+.theme-toggle__icon svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+</style>
+
+<button
+    id="theme-toggle"
+    type="button"
+    class="theme-toggle"
+    aria-pressed="false"
+    data-theme-toggle
+>
+    <span id="icon-sun" class="theme-toggle__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation">
+            <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.95 6.95-1.41-1.41M7.46 7.46 6.05 6.05m11.31 0-1.41 1.41M7.46 16.54l-1.41 1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none" />
+        </svg>
+    </span>
+    <span id="icon-moon" class="theme-toggle__icon hidden" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+    </span>
+    <span id="theme-label" class="sr-only">Mode clair</span>
+</button>

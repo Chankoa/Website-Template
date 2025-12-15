@@ -3,6 +3,7 @@ import Layout from "../components/layout/Layout.astro";
 import "../styles/components/cards.scss";
 import "../styles/components/code-blocks.scss";
 import "../styles/components/note-callout.scss";
+import wikiUiClientUrl from "../scripts/wiki-ui-client.ts?url";
 
 const sections = [
   { id: "fondations", label: "Fondations" },
@@ -13,6 +14,7 @@ const sections = [
   { id: "performance", label: "Performance" },
   { id: "schema", label: "Schéma d'ensemble" },
 ];
+
 ---
 
 <Layout title="Wiki UI" description="Bonnes pratiques de design system et implémentation front dans ce projet.">
@@ -218,8 +220,4 @@ Pages (.astro)
   </section>
 </Layout>
 
-<script type="module">
-  import "/src/scripts/prism-client.ts";
-  import { initWikiPage } from "/src/scripts/wiki-shared.ts";
-  initWikiPage("#wiki-nav");
-</script>
+<script type="module" src={wikiUiClientUrl}></script>

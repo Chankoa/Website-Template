@@ -3,6 +3,7 @@ import Layout from "../components/layout/Layout.astro";
 import "../styles/components/code-blocks.scss";
 import "../styles/components/color-swatches.scss";
 import "../styles/components/note-callout.scss";
+import guideStylesClientUrl from "../scripts/guide-styles-client.ts?url";
 
 const sections = [
   { id: "couleurs", label: "Couleurs & thèmes" },
@@ -22,6 +23,7 @@ const colorRoles = [
   { name: "Texte fort", variable: "--text-strong", token: "text-strong", fallback: "#0f2a43", usage: "Titres, labels" },
   { name: "Texte atténué", variable: "--text-muted", token: "text-muted", fallback: "rgba(15, 42, 67, 0.65)", usage: "Méta, sous-titres" },
 ];
+
 ---
 
 <Layout title="Guide des styles" description="Référence rapide du design system, avec exemples et snippets pour personnaliser.">
@@ -195,8 +197,4 @@ const colorRoles = [
   </section>
 </Layout>
 
-<script type="module">
-  import "/src/scripts/prism-client.ts";
-  import { initWikiPage } from "/src/scripts/wiki-shared.ts";
-  initWikiPage("#styleguide-nav");
-</script>
+<script type="module" src={guideStylesClientUrl}></script>

@@ -1,0 +1,15 @@
+:root[data-theme="blue-ocean"]{
+    --surface-hero-bg: 
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(19, 145, 155,.255), transparent 55%),
+        linear-gradient(
+            145deg,
+            rgba(241, 245, 249, 0.95),
+            rgba(248, 250, 252, 0.9));
+    // --surface-hero: linear-gradient(140deg, rgba(118, 214, 220, 0.18), rgba(232, 238, 244, 0.92));
+}
+
+.hero {
+    background: var(--surface-hero-bg);
+}

@@ -1,5 +1,16 @@
 // Shared front-end helpers for wiki-like pages (guide-styles, wiki-ui)
 // Adds scrollspy on nav links and code-block chrome + copy button.
+import * as PrismNamespace from "prismjs";
+
+// Ensure Prism is available globally before loading language components (they expect a global Prism).
+const Prism = (PrismNamespace as any).default ?? PrismNamespace;
+(globalThis as any).Prism = Prism;
+
+import "prismjs/components/prism-markup";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-scss";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-typescript";
 
 export function initScrollSpy(options: {
   navSelector: string;
@@ -92,6 +103,27 @@ function applyLineHighlights(pre: HTMLPreElement) {
   codeEl.dataset.enhanced = "1";
 }
 
+async function copyText(text: string) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "true");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  const success = document.execCommand("copy");
+  textarea.remove();
+
+  if (!success) {
+    throw new Error("Clipboard unavailable");
+  }
+}
+
 export function enhanceCodeBlocks(selector = 'pre[class*="language-"]') {
   const codeBlocks = Array.from(document.querySelectorAll<HTMLPreElement>(selector));
   if (!codeBlocks.length) return;
@@ -130,7 +162,7 @@ export function enhanceCodeBlocks(selector = 'pre[class*="language-"]') {
       const codeEl = (pre.querySelector("code") as HTMLElement) || pre;
       const text = codeEl.innerText;
       try {
-        await navigator.clipboard.writeText(text);
+        await copyText(text);
         btn.textContent = "Copié !";
         btn.classList.add("is-success");
         setTimeout(() => {
@@ -164,8 +196,7 @@ export function initWikiPage(navSelector: string, sectionSelector = "[data-spy-s
       prismGlobal.highlightAll();
     } else {
       try {
-        const prismModule = await import("prismjs");
-        prismModule?.default?.highlightAll?.();
+        Prism.highlightAll();
       } catch (err) {
         // Fallback silently if Prism is unavailable; code chrome will still render.
       }
