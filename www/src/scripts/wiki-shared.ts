@@ -1,16 +1,5 @@
 // Shared front-end helpers for wiki-like pages (guide-styles, wiki-ui)
 // Adds scrollspy on nav links and code-block chrome + copy button.
-import * as PrismNamespace from "prismjs";
-
-// Ensure Prism is available globally before loading language components (they expect a global Prism).
-const Prism = (PrismNamespace as any).default ?? PrismNamespace;
-(globalThis as any).Prism = Prism;
-
-import "prismjs/components/prism-markup";
-import "prismjs/components/prism-css";
-import "prismjs/components/prism-scss";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-typescript";
 
 export function initScrollSpy(options: {
   navSelector: string;
@@ -181,6 +170,95 @@ export function enhanceCodeBlocks(selector = 'pre[class*="language-"]') {
   });
 }
 
+function enhanceDocsMobileStickyNav(navSelector: string) {
+  const nav = document.querySelector<HTMLElement>(navSelector);
+  if (!nav) return;
+
+  const aside = nav.closest<HTMLElement>("aside[data-docs-nav]");
+  if (!aside) return;
+
+  const title = aside.querySelector<HTMLElement>("[data-docs-nav-title]");
+  const siteHeader = document.querySelector<HTMLElement>("body > header.sticky");
+  const mdMql = window.matchMedia("(min-width: 768px)");
+
+  const flushClasses = ["-mx-4", "rounded-none", "border-l-0", "border-r-0"];
+
+  const applyMobileTop = () => {
+    if (!siteHeader) {
+      aside.style.top = "0px";
+      return 0;
+    }
+    const h = Math.round(siteHeader.getBoundingClientRect().height);
+    aside.style.top = `${h}px`;
+    return h;
+  };
+
+  let lastStuck: boolean | null = null;
+
+  const update = () => {
+    // Desktop: keep existing md:* styling and show title.
+    if (mdMql.matches) {
+      aside.style.top = "";
+      flushClasses.forEach((cls) => aside.classList.remove(cls));
+      title?.classList.remove("hidden");
+      lastStuck = null;
+      return;
+    }
+
+    const topPx = applyMobileTop();
+    const rect = aside.getBoundingClientRect();
+    const stuck = rect.top <= topPx + 0.5;
+    if (stuck === lastStuck) return;
+    lastStuck = stuck;
+
+    flushClasses.forEach((cls) => aside.classList.toggle(cls, stuck));
+    title?.classList.toggle("hidden", stuck);
+  };
+
+  // Initial + reactive updates
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  mdMql.addEventListener?.("change", update);
+}
+
+function enhanceExpressiveCodeFrames() {
+  const frames = Array.from(document.querySelectorAll<HTMLElement>(".expressive-code figure.frame"));
+  if (!frames.length) return;
+
+  frames.forEach((frame) => {
+    const header = frame.querySelector<HTMLElement>("figcaption.header");
+    const pre = frame.querySelector<HTMLPreElement>("pre[data-language]");
+    if (!header || !pre) return;
+    if ((header as any).dataset?.enhanced === "1") return;
+
+    const lang = (pre.dataset.language || "").trim();
+    if (!lang) return;
+
+    const langNormalized = lang.toLowerCase();
+    const container = frame.closest<HTMLElement>(".expressive-code");
+
+    // Make Expressive Code's built-in header visible.
+    frame.classList.add("has-title");
+
+    // EC styles expect a `.title` element.
+    const existingTitleEl = header.querySelector<HTMLElement>(".title");
+    if (existingTitleEl) {
+      existingTitleEl.textContent = lang.toUpperCase();
+    } else {
+      const titleEl = document.createElement("span");
+      titleEl.className = "title";
+      titleEl.textContent = lang.toUpperCase();
+      header.prepend(titleEl);
+    }
+
+    header.setAttribute("data-lang", langNormalized);
+    frame.setAttribute("data-lang", langNormalized);
+    container?.setAttribute("data-lang", langNormalized);
+    (header as any).dataset.enhanced = "1";
+  });
+}
+
 function runOnReady(cb: () => void) {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", cb, { once: true });
@@ -190,24 +268,14 @@ function runOnReady(cb: () => void) {
 }
 
 export function initWikiPage(navSelector: string, sectionSelector = "[data-spy-section]") {
-  const highlightThenEnhance = async () => {
-    const prismGlobal = (typeof window !== "undefined" && (window as any).Prism) || null;
-    if (prismGlobal?.highlightAll) {
-      prismGlobal.highlightAll();
-    } else {
-      try {
-        Prism.highlightAll();
-      } catch (err) {
-        // Fallback silently if Prism is unavailable; code chrome will still render.
-      }
-    }
-
-    // Allow Prism to inject markup before we wrap blocks.
+  const enhance = () => {
     requestAnimationFrame(() => {
+      enhanceExpressiveCodeFrames();
       enhanceCodeBlocks();
+      enhanceDocsMobileStickyNav(navSelector);
       initScrollSpy({ navSelector, sectionSelector });
     });
   };
 
-  runOnReady(highlightThenEnhance);
+  runOnReady(enhance);
 }

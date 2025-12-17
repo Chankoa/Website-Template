@@ -4,11 +4,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-[var(--color-border)] mt-16">
-  <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-[var(--color-muted)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+  <div class="relative max-w-5xl mx-auto px-4 py-8 pr-16 md:pr-20 text-sm text-[var(--color-muted)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
     <p>
       © {year} {siteConfig.name}. Tous droits réservés.
     </p>
-    <div class="flex flex-wrap gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       {siteConfig.contact.phone && (
         <a href={`tel:${siteConfig.contact.phone}`} class="hover:text-[var(--color-accent)]">
           {siteConfig.contact.phone}
@@ -20,5 +20,26 @@ const year = new Date().getFullYear();
         </a>
       )}
     </div>
+
+    <button
+      type="button"
+      class="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] text-[var(--text-strong)] shadow-sm transition-colors hover:bg-[var(--surface-card)]"
+      aria-label="Revenir en haut de page"
+      title="Revenir en haut de page"
+      data-scroll-top
+    >
+      <span class="sr-only">Haut de page</span>
+      <span aria-hidden="true">↑</span>
+    </button>
   </div>
 </footer>
+
+<script is:inline>
+  (() => {
+    const btn = document.querySelector('[data-scroll-top]');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>

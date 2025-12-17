@@ -4,6 +4,7 @@ import "../styles/components/cards.scss";
 import "../styles/components/code-blocks.scss";
 import "../styles/components/note-callout.scss";
 import wikiUiClientUrl from "../scripts/wiki-ui-client.ts?url";
+import { Code } from "astro-expressive-code/components";
 
 const sections = [
   { id: "fondations", label: "Fondations" },
@@ -20,8 +21,8 @@ const sections = [
 <Layout title="Wiki UI" description="Bonnes pratiques de design system et implémentation front dans ce projet.">
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
-      <aside class="md:sticky md:top-20 md:self-start md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-4 shadow-sm">
-        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3">Navigation</p>
+      <aside class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm" data-docs-nav>
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>Navigation</p>
         <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="wiki-nav">
           {sections.map((item) => (
             <a
@@ -35,7 +36,7 @@ const sections = [
         </nav>
       </aside>
 
-      <div class="space-y-14 md:col-start-2">
+      <div class="space-y-14 md:col-start-2 min-w-0">
         <header class="space-y-4">
           <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Wiki UI</p>
           <h1 class="text-3xl font-bold text-[var(--text-strong)]">Guide pratique</h1>
@@ -61,12 +62,15 @@ const sections = [
             <p class="note-callout__text">Exports : <code>src/styles/design-system/index.scss</code></p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`:root {
+            <Code
+              lang="css"
+              code={`:root {
   --space-3: 0.75rem;
   --radius-lg: 0.75rem;
   --shadow-md: 0 8px 20px rgba(15, 42, 67, 0.15);
   --font-body: "Inter", system-ui, sans-serif;
-}`}</code></pre>
+}`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Modifie ce fichier pour ajuster la grille de spacing ou les rayons. Les composants y piochent leurs valeurs.</p>
           </div>
         </section>
@@ -83,14 +87,16 @@ const sections = [
             <p class="note-callout__text">Thème Blue Ocean : <code>src/styles/design-system/themes/_blue-ocean.scss</code></p>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="doc-card space-y-2">
+            <div class="doc-card space-y-2 min-w-0">
               <p class="text-sm font-semibold">Activer un thème</p>
-              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<html data-theme="blue-ocean">`}</code></pre>
+              <Code lang="html" code={`<html data-theme="blue-ocean">`} />
               <p class="text-sm text-[var(--text-muted)]">Ou appliquez <code>data-theme="brand"</code> si vous ajoutez votre propre fichier dans <code>themes/</code>.</p>
             </div>
-            <div class="doc-card space-y-2">
+            <div class="doc-card space-y-2 min-w-0">
               <p class="text-sm font-semibold">Créer un thème</p>
-              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`@use "../styles/design-system/semantic-tokens" as tokens;
+              <Code
+                lang="scss"
+                code={`@use "../styles/design-system/semantic-tokens" as tokens;
 
 $brand-tokens: (
   surface-bg: #fdf7ff,
@@ -114,7 +120,8 @@ $brand-tokens: (
 [data-theme="brand"] {
   @include tokens.apply-theme($brand-tokens);
 }
-`}</code></pre>
+`}
+              />
             </div>
           </div>
         </section>
@@ -128,13 +135,16 @@ $brand-tokens: (
             <p class="note-callout__text">Import global : <code>src/styles/main.scss</code></p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`.card-elevated {
+            <Code
+              lang="scss"
+              code={`.card-elevated {
   border-radius: var(--radius-lg);
   background: var(--color-bg-alt);
   box-shadow: var(--shadow-soft);
   padding: var(--space-5);
   border: 1px solid var(--color-border);
-}`}</code></pre>
+}`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Ajoute un nouveau composant dans un fichier dédié (ex. <code>_alerts.scss</code>) et importe-le dans <code>styles/main.scss</code>.</p>
           </div>
         </section>
@@ -148,11 +158,14 @@ $brand-tokens: (
             <p class="note-callout__text">Tokens d’accent : <code>src/styles/design-system/_semantic-tokens.scss</code></p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`a:focus-visible, button:focus-visible {
+            <Code
+              lang="css"
+              code={`a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 3px;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-primary) 25%, transparent);
-}`}</code></pre>
+}`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Conserve des focus nets même en dark mode : les accents sont recalculés par le thème actif.</p>
           </div>
         </section>
@@ -165,9 +178,12 @@ $brand-tokens: (
             <p class="note-callout__text">Typo & corps : <code>src/styles/layout/_base.scss</code></p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<p class="text-[var(--text-muted)] leading-relaxed">
+            <Code
+              lang="html"
+              code={`<p class="text-[var(--text-muted)] leading-relaxed">
   Les textes secondaires utilisent --text-muted pour garder un contraste suffisant.
-</p>`}</code></pre>
+</p>`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Ajuste la hiérarchie typo (h1–h6) dans <code>layout/_base.scss</code> si besoin.</p>
           </div>
         </section>
@@ -181,9 +197,12 @@ $brand-tokens: (
             <p class="note-callout__text">Config Astro : <code>astro.config.mjs</code></p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-js"><code class="language-js">{`// Exemple de classe sûre pour la purge
+            <Code
+              lang="js"
+              code={`// Exemple de classe sûre pour la purge
 const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non listés
-`}</code></pre>
+`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Utilise des valeurs arbitraires Tailwind seulement si nécessaires (<code>bg-[var(--surface-card)]</code>), et garde-les en dur dans le markup.</p>
           </div>
         </section>
@@ -197,7 +216,9 @@ const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non 
             <p class="note-callout__text">Schéma maintenu dans ce fichier</p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-text"><code class="language-text">{`Layout.astro
+            <Code
+              lang="text"
+              code={`Layout.astro
 ├─ import tailwind.css (utilities, reset)
 └─ import main.scss (design system + composants)
      ├─ design-system/index.scss
@@ -211,7 +232,8 @@ const buttonClass = "btn-primary"; // plutôt que concaténer des fragments non 
 Pages (.astro)
 ├─ Utilisent Tailwind pour le layout rapide
 └─ Peuvent consommer les variables CSS du DS
-     (ex. bg-[var(--surface-card)] ou padding via tokens)`}</code></pre>
+     (ex. bg-[var(--surface-card)] ou padding via tokens)`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Active un thème avec <code>data-theme</code> et un mode sombre lié au thème via <code>data-base-theme</code>.</p>
           </div>
         </section>

@@ -4,6 +4,7 @@ import "../styles/components/code-blocks.scss";
 import "../styles/components/color-swatches.scss";
 import "../styles/components/note-callout.scss";
 import guideStylesClientUrl from "../scripts/guide-styles-client.ts?url";
+import { Code } from "astro-expressive-code/components";
 
 const sections = [
   { id: "couleurs", label: "Couleurs & thèmes" },
@@ -19,7 +20,7 @@ const colorRoles = [
   { name: "Fond principal", variable: "--surface-bg", token: "surface-bg", fallback: "#f5f7fa", usage: "Arrière-plan global" },
   { name: "Cartes / panneaux", variable: "--surface-card", token: "surface-card", fallback: "#ffffff", usage: "Cartes, panneaux flottants" },
   { name: "Accent primaire", variable: "--accent-primary", token: "accent-primary", fallback: "#2cb1bc", usage: "CTA, éléments actifs" },
-  { name: "Accent secondaire", variable: "--accent-secondary", token: "accent-secondary", fallback: "#0f2a43", usage: "Titres, liens par défaut" },
+  { name: "Accent secondaire", variable: "--accent-secondary", token: "accent-secondary", fallback: "#0f2a43", usage: "Titres, liens au survol" },
   { name: "Texte fort", variable: "--text-strong", token: "text-strong", fallback: "#0f2a43", usage: "Titres, labels" },
   { name: "Texte atténué", variable: "--text-muted", token: "text-muted", fallback: "rgba(15, 42, 67, 0.65)", usage: "Méta, sous-titres" },
 ];
@@ -29,8 +30,8 @@ const colorRoles = [
 <Layout title="Guide des styles" description="Référence rapide du design system, avec exemples et snippets pour personnaliser.">
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
-      <aside class="md:sticky md:top-20 md:self-start md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-4 shadow-sm">
-        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3">Navigation</p>
+      <aside class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm" data-docs-nav>
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>Navigation</p>
         <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="styleguide-nav">
           {sections.map((item) => (
             <a
@@ -82,12 +83,12 @@ const colorRoles = [
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="doc-card">
               <p class="text-sm font-semibold mb-2">Activer Blue Ocean</p>
-              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<body data-theme="blue-ocean">`}</code></pre>
+              <Code lang="html" code={`<body data-theme="blue-ocean">`} />
               <p class="text-sm text-[var(--text-muted)] mt-2">Les alias <code>--color-accent</code>, <code>--color-bg</code>, etc. sont mis à jour automatiquement.</p>
             </div>
             <div class="doc-card">
               <p class="text-sm font-semibold mb-2">Changer l’accent primaire</p>
-              <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`:root {\n  --accent-primary: #e4572e;\n}`}</code></pre>
+              <Code lang="css" code={`:root {\n  --accent-primary: #e4572e;\n}`} />
               <p class="text-sm text-[var(--text-muted)] mt-2">Ou surchargez dans un thème custom : <code>[data-theme="brand"]</code>.</p>
             </div>
           </div>
@@ -109,7 +110,10 @@ const colorRoles = [
               <span class="text-sm text-[var(--text-muted)]">Corps</span>
               <p>Texte de paragraphe utilisant <code>--font-body</code> et la couleur <code>--text-default</code>.</p>
             </div>
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`:root {\n  --font-heading: "Space Grotesk", system-ui, sans-serif;\n  --font-body: "Inter", system-ui, sans-serif;\n}`}</code></pre>
+            <Code
+              lang="css"
+              code={`:root {\n  --font-heading: "Space Grotesk", system-ui, sans-serif;\n  --font-body: "Inter", system-ui, sans-serif;\n}`}
+            />
           </div>
         </section>
 
@@ -125,7 +129,10 @@ const colorRoles = [
               <a class="btn-primary" href="#">Appel à l’action</a>
               <a class="btn-primary" href="#" style="--color-accent: #e4572e;">Accent custom inline</a>
             </div>
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`.btn-primary {\n  background: var(--color-accent);\n  color: #fff;\n  box-shadow: var(--shadow-soft);\n}`}</code></pre>
+            <Code
+              lang="css"
+              code={`.btn-primary {\n  background: var(--color-accent);\n  color: #fff;\n  box-shadow: var(--shadow-soft);\n}`}
+            />
           </div>
         </section>
 
@@ -146,7 +153,10 @@ const colorRoles = [
               <p class="text-[var(--text-muted)]">Utilise <code>--shadow-soft</code> et <code>--color-bg-alt</code>.</p>
             </div>
           </div>
-          <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-css"><code class="language-css">{`.doc-card {\n  background: var(--surface-card);\n  box-shadow: var(--shadow-md);\n}\n.card-elevated {\n  background: var(--color-bg-alt);\n}`}</code></pre>
+          <Code
+            lang="css"
+            code={`.doc-card {\n  background: var(--surface-card);\n  box-shadow: var(--shadow-md);\n}\n.card-elevated {\n  background: var(--color-bg-alt);\n}`}
+          />
         </section>
 
         <section id="layout" class="scroll-mt-24 space-y-4" data-spy-section>
@@ -157,7 +167,10 @@ const colorRoles = [
             <p class="note-callout__text">Layout : <code>src/styles/layout/_base.scss</code> pour la structure et <code>src/styles/layout/_containers.scss</code> pour la largeur contrôlée.</p>
           </div>
           <div class="doc-card space-y-2">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<div class="app-shell">\n  <main class="main-content">…</main>\n</div>`}</code></pre>
+            <Code
+              lang="html"
+              code={`<div class="app-shell">\n  <main class="main-content">…</main>\n</div>`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Utilisez <code>.container</code> pour limiter la largeur : max 1120px.</p>
           </div>
         </section>
@@ -176,7 +189,7 @@ const colorRoles = [
               <li><code>.u-text-muted</code> : couleur <code>--text-muted</code>.</li>
               <li><code>.u-border-soft</code> : bordure <code>--border-soft</code>.</li>
             </ul>
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-html"><code class="language-html">{`<span class="u-sr-only">Libellé accessible</span>`}</code></pre>
+            <Code lang="html" code={`<span class="u-sr-only">Libellé accessible</span>`} />
           </div>
         </section>
 
@@ -188,7 +201,10 @@ const colorRoles = [
             <p class="note-callout__text">Nouveaux thèmes : créez un fichier dans <code>src/styles/design-system/themes/</code> (ex. <code>_brand.scss</code>) et importez-le. Activez avec <code>data-theme="brand"</code>.</p>
           </div>
           <div class="doc-card space-y-3">
-            <pre class="bg-[var(--surface-muted)] text-[var(--text-strong)] text-xs p-3 rounded-md overflow-auto language-scss"><code class="language-scss">{`@use "../styles/design-system/semantic-tokens" as tokens;\n\n$brand-tokens: (\n  surface-bg: #fef9f5,\n  surface-card: #ffffff,\n  surface-muted: #ffeede,\n  text-strong: #2b1a14,\n  text-default: #3c241c,\n  text-muted: rgba(43,26,20,0.7),\n  border-soft: #f5d7c3,\n  border-strong: #eabf9b,\n  accent-primary: #ff7a59,\n  accent-primary-strong: #e8643f,\n  accent-secondary: #2b1a14,\n  accent-tertiary: #ffd580,\n  status-info: #2cb1bc,\n  status-success: #1fbf90,\n  status-warning: #ffb347,\n  status-danger: #ff5a5f\n);\n\n[data-theme="brand"] {\n  @include tokens.apply-theme($brand-tokens);\n}`}</code></pre>
+            <Code
+              lang="scss"
+              code={`@use "../styles/design-system/semantic-tokens" as tokens;\n\n$brand-tokens: (\n  surface-bg: #fef9f5,\n  surface-card: #ffffff,\n  surface-muted: #ffeede,\n  text-strong: #2b1a14,\n  text-default: #3c241c,\n  text-muted: rgba(43,26,20,0.7),\n  border-soft: #f5d7c3,\n  border-strong: #eabf9b,\n  accent-primary: #ff7a59,\n  accent-primary-strong: #e8643f,\n  accent-secondary: #2b1a14,\n  accent-tertiary: #ffd580,\n  status-info: #2cb1bc,\n  status-success: #1fbf90,\n  status-warning: #ffb347,\n  status-danger: #ff5a5f\n);\n\n[data-theme="brand"] {\n  @include tokens.apply-theme($brand-tokens);\n}`}
+            />
             <p class="text-sm text-[var(--text-muted)]">Ensuite, appliquez <code>data-theme="brand"</code> sur <code>&lt;body&gt;</code> ou <code>&lt;html&gt;</code>.</p>
           </div>
         </section>
