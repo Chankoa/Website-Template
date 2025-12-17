@@ -1,6 +1,7 @@
 ---
 import Layout from "../components/layout/Layout.astro";
 import "../styles/components/code-blocks.scss";
+import "../styles/components/expressive-code-overrides.scss";
 import "../styles/components/color-swatches.scss";
 import "../styles/components/note-callout.scss";
 import guideStylesClientUrl from "../scripts/guide-styles-client.ts?url";
@@ -127,7 +128,7 @@ const colorRoles = [
           <div class="doc-card space-y-3">
             <div class="flex gap-3 items-center flex-wrap">
               <a class="btn-primary" href="#">Appel à l’action</a>
-              <a class="btn-primary" href="#" style="--color-accent: #e4572e;">Accent custom inline</a>
+              <a class="btn-primary is-outline" href="#">Bouton Outline</a>
             </div>
             <Code
               lang="css"

@@ -79,16 +79,21 @@ code:not([class*="language-"]) {
   min-height: 1.2em;
 }
 .code-line.is-highlighted {
-  background: linear-gradient(90deg, rgba(124, 58, 237, 0.12), rgba(124, 58, 237, 0.06));
-  border-left: 3px solid var(--accent-primary, #7c3aed);
-  padding-left: calc(var(--space-2) * 0.75);
-  margin-left: -0.35rem;
-  margin-right: -0.35rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    color-mix(in srgb, var(--accent-primary) 10%, transparent)
+  );
+  border-left: 4px solid color-mix(in srgb, var(--accent-primary) 75%, transparent);
 }
 
 :root[data-theme="dark"] .code-line.is-highlighted {
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0.08));
-  border-color: var(--accent-primary, #38bdf8);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    color-mix(in srgb, var(--accent-primary) 10%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--accent-primary) 70%, transparent);
 }
 
 /* Dark mode chrome */
@@ -171,10 +176,10 @@ code:not([class*="language-"]) {
 .expressive-code .ec-line.is-highlighted .code {
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--code-accent) 18%, transparent),
-    color-mix(in srgb, var(--code-accent) 8%, transparent)
+    color-mix(in srgb, var(--code-accent) 26%, transparent),
+    color-mix(in srgb, var(--code-accent) 12%, transparent)
   );
-  border-left: 3px solid color-mix(in srgb, var(--code-accent) 55%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--code-accent) 70%, transparent);
   padding-left: calc(var(--space-2) * 0.75);
   margin-left: -0.35rem;
   margin-right: -0.35rem;

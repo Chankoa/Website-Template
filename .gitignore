@@ -1,0 +1,11 @@
+# Node / build
+node_modules/
+dist/
+
+# Local logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+/*
+ * Expressive Code – overrides
+ * Purpose: project-specific tweaks that should not live in the base code block styles.
+ */
+
+/* Header */
+.expressive-code .frame .header {
+	border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+.expressive-code .frame {
+	border-radius: var(--radius-md) !important;
+	box-shadow: var(--shadow-soft) !important;
+}

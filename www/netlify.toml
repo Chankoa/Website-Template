@@ -1,6 +1,10 @@
 [build]
-  command = "npm run build"
+  command = "npm ci --include=optional && npm run build"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--include=optional"
 
 [context.production.environment]
   # Remplace par ton domaine final, incluant le sous-chemin /www si nécessaire

@@ -20,6 +20,24 @@
   filter: brightness(1.05);
 }
 
+.btn-primary.is-outline {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  box-shadow: none;
+}
+
+.btn-primary.is-outline:hover {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 75%, transparent);
+  filter: none;
+}
+
+.btn-primary.is-outline:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  outline-offset: 2px;
+}
+
 .btn-primary.is-rounded {
   border-radius: var(--radius-pill);
 }
