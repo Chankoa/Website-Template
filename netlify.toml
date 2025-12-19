@@ -1,6 +1,6 @@
 [build]
   base = "www"
-  command = "npm ci --include=optional || npm install --include=optional && npm run build"
+  command = "npm ci --include=optional || npm install --include=optional; npm install --no-save @rollup/rollup-linux-x64-gnu@4.53.3; npm run build"
   publish = "dist"
 
 [build.environment]
