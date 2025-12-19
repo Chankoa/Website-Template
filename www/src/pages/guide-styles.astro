@@ -4,7 +4,6 @@ import "../styles/components/code-blocks.scss";
 import "../styles/components/expressive-code-overrides.scss";
 import "../styles/components/color-swatches.scss";
 import "../styles/components/note-callout.scss";
-import guideStylesClientUrl from "../scripts/guide-styles-client.js?url";
 import { Code } from "astro-expressive-code/components";
 
 const sections = [
@@ -212,6 +211,10 @@ const colorRoles = [
       </div>
     </div>
   </section>
-</Layout>
 
-<script type="module" src={guideStylesClientUrl}></script>
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#styleguide-nav");
+  </script>
+</Layout>

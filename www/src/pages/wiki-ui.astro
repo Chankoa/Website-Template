@@ -4,7 +4,6 @@ import "../styles/components/cards.scss";
 import "../styles/components/code-blocks.scss";
 import "../styles/components/expressive-code-overrides.scss";
 import "../styles/components/note-callout.scss";
-import wikiUiClientUrl from "../scripts/wiki-ui-client.js?url";
 import { Code } from "astro-expressive-code/components";
 
 const sections = [
@@ -241,6 +240,10 @@ Pages (.astro)
       </div>
     </div>
   </section>
-</Layout>
 
-<script type="module" src={wikiUiClientUrl}></script>
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#wiki-nav");
+  </script>
+</Layout>

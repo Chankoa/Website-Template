@@ -1,9 +1,12 @@
 # Node / build
 node_modules/
 dist/
+www/node_modules/
+www/dist/
 
 # Astro
 .astro/
+www/.astro/
 
 # Local logs
 logs/
