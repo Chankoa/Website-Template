@@ -158,7 +158,7 @@ export function enhanceCodeBlocks(selector = 'pre[class*="language-"]') {
           btn.textContent = "Copier";
           btn.classList.remove("is-success");
         }, 1600);
-      } catch (e) {
+      } catch {
         btn.textContent = "Erreur";
         btn.classList.add("is-error");
         setTimeout(() => {
@@ -230,7 +230,7 @@ function enhanceExpressiveCodeFrames() {
     const header = frame.querySelector<HTMLElement>("figcaption.header");
     const pre = frame.querySelector<HTMLPreElement>("pre[data-language]");
     if (!header || !pre) return;
-    if ((header as any).dataset?.enhanced === "1") return;
+    if (header.dataset.enhanced === "1") return;
 
     const lang = (pre.dataset.language || "").trim();
     if (!lang) return;
@@ -255,7 +255,7 @@ function enhanceExpressiveCodeFrames() {
     header.setAttribute("data-lang", langNormalized);
     frame.setAttribute("data-lang", langNormalized);
     container?.setAttribute("data-lang", langNormalized);
-    (header as any).dataset.enhanced = "1";
+    header.dataset.enhanced = "1";
   });
 }
 
