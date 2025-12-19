@@ -1,6 +1,6 @@
 [build]
   base = "www"
-  command = "npm ci --include=optional && npm run build"
+  command = "npm ci --include=optional || npm install --include=optional && npm run build"
   publish = "dist"
 
 [build.environment]
