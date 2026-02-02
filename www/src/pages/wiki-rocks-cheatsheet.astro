@@ -1,0 +1,418 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import "../styles/components/cards.scss";
+import "../styles/components/code-blocks.scss";
+import "../styles/components/expressive-code-overrides.scss";
+import "../styles/components/note-callout.scss";
+import { Code } from "astro-expressive-code/components";
+
+const sections = [
+  { id: "intro", label: "Contexte" },
+  { id: "espacement", label: "Espacement" },
+  { id: "typo", label: "Texte / Typo" },
+  { id: "couleurs", label: "Couleurs" },
+  { id: "layout", label: "Layout / Display" },
+  { id: "effets", label: "Bordures / Effets" },
+  { id: "animations", label: "Animations" }
+];
+
+const spacing = [
+  // Padding
+  ".padded",
+  ".padded-2x",
+  ".unpadded",
+  ".inner-top-space",
+  ".inner-top-space-2x",
+  ".inner-top-space-4x",
+  ".inner-top-space-6x",
+  ".inner-bottom-space",
+  ".inner-bottom-space-2x",
+  ".inner-bottom-space-4x",
+  ".inner-bottom-space-6x",
+  ".inner-left-space-xs",
+  ".inner-left-space-s",
+  ".inner-left-space",
+  ".inner-right-space-xs",
+  ".inner-right-space-s",
+  ".inner-right-space",
+  ".inner-right-space-2x",
+  ".inner-side-space",
+  ".inner-side-space-2x",
+  ".inner-y-space",
+  ".inner-y-space-2x",
+  ".inner-y-space-4x",
+  ".inner-space-xl",
+  ".inner-space-xxl",
+  // Margin / helpers
+  ".m-auto",
+  ".ml-auto",
+  ".mr-auto",
+  ".no-margin-bottom",
+  ".no-margin-top",
+  ".no-margins",
+  ".side-spacer",
+  ".side-spacer-2x",
+  ".side-spacer-s",
+  ".spacer-2x",
+  ".spacer-4x",
+  ".spacer-bottom",
+  ".spacer-bottom-2x",
+  ".spacer-bottom-4x",
+  ".spacer-left",
+  ".spacer-left-2x",
+  ".spacer-left-s",
+  ".spacer-left-xs",
+  ".spacer-right",
+  ".spacer-right-2x",
+  ".spacer-right-s",
+  ".spacer-right-xs",
+  ".spacer-right-xs-1-2x",
+  ".spacer-top",
+  ".spacer-top-2x",
+  ".spacer-top-3x",
+  ".spacer-top-4x",
+  // Responsive-ish variants present in the source
+  ".inner-x-space-2x-l",
+  ".inner-x-space-2x-m",
+  ".inner-x-space-2x-xl",
+  ".inner-x-space-l",
+  ".inner-x-space-m",
+  ".inner-x-space-xl",
+  ".inner-y-space-2x-xl",
+  ".padded-2x-l",
+  ".padded-2x-xl",
+  ".padded-4x-xl",
+  ".padded-left-l",
+  ".padded-left-m"
+];
+
+const typo = [
+  ".centered-heading",
+  ".h1",
+  ".h2",
+  ".h3",
+  ".h4",
+  ".h5",
+  ".h6",
+  ".is-big-and-vertical",
+  ".is-big-shape",
+  ".is-big-x5",
+  ".is-big-x10",
+  ".is-big-x15",
+  ".is-big-x20",
+  ".is-black-txt",
+  ".is-bold",
+  ".is-capitalized",
+  ".is-italic",
+  ".is-light",
+  ".is-regular",
+  ".is-small",
+  ".is-strong",
+  ".is-uppercase",
+  ".is-x-small",
+  ".main-font",
+  ".txt-bold",
+  ".txt-center",
+  ".txt-italic",
+  ".txt-left",
+  ".txt-light",
+  ".txt-right"
+];
+
+const colors = [
+  ".color-1",
+  ".color-2",
+  ".color-3",
+  ".color-4",
+  ".color-5",
+  ".color-6",
+  ".color-7",
+  ".color-8",
+  ".color-9",
+  ".color-10",
+  ".color-11",
+  ".color-12",
+  ".txt-color-1",
+  ".txt-color-2",
+  ".txt-color-3",
+  ".txt-color-4",
+  ".txt-color-5",
+  ".txt-color-6",
+  ".txt-color-7",
+  ".txt-color-8",
+  ".txt-color-9",
+  ".txt-color-10",
+  ".txt-color-11",
+  ".txt-color-12"
+];
+
+const layout = [
+  ".absolute",
+  ".relative",
+  ".fixed",
+  ".sticky-one",
+  ".over-h",
+  ".clear",
+  ".centerer",
+  ".top-0",
+  ".top-1",
+  ".bottom-0",
+  ".bottom-1",
+  ".left-0",
+  ".left-1",
+  ".right-0",
+  ".right-1",
+  ".z-depth-0",
+  ".z-1",
+  ".z-10",
+  ".z-50",
+  ".z-100",
+  ".z-1000",
+  ".conteneur",
+  ".conteneur-xs",
+  ".conteneur-xxs",
+  ".full-xl",
+  ".fullscreen-l",
+  ".top-bar",
+  ".top-minus-25",
+  ".unguttered",
+  ".half",
+  ".third",
+  ".two-third",
+  ".quarter",
+  ".three-quarter",
+  ".sixth",
+  ".grid-half",
+  ".grid-third",
+  ".grid-quarter",
+  ".hide-on-large",
+  ".hide-on-small",
+  ".show-on-large",
+  ".show-on-medium",
+  ".show-on-xlarge",
+  // Responsive variants
+  ".half-s",
+  ".half-m",
+  ".half-l",
+  ".half-xl",
+  ".third-s",
+  ".third-m",
+  ".third-l",
+  ".third-xl",
+  ".two-third-s",
+  ".two-third-m",
+  ".two-third-l",
+  ".two-third-xl",
+  ".quarter-s",
+  ".quarter-m",
+  ".quarter-l",
+  ".quarter-xl",
+  ".three-quarter-s",
+  ".three-quarter-m",
+  ".three-quarter-l",
+  ".three-quarter-xl",
+  ".sixth-s",
+  ".sixth-m",
+  ".sixth-l",
+  ".sixth-xl",
+  ".grid-half-m",
+  ".grid-half-l",
+  ".grid-half-xl",
+  ".grid-third-m",
+  ".grid-third-l",
+  ".grid-third-xl",
+  ".grid-quarter-m",
+  ".grid-quarter-l",
+  ".grid-quarter-xl"
+];
+
+const effects = [
+  ".border-bottom",
+  ".border-bottom-dashed",
+  ".border-bottom-left-s",
+  ".border-green",
+  ".border-grey",
+  ".border-left-dashed",
+  ".border-left-m",
+  ".border-left-s",
+  ".border-left-sm",
+  ".border-light-grey",
+  ".border-radius-m",
+  ".border-radius-s",
+  ".border-radius-xs",
+  ".border-right",
+  ".border-right-m",
+  ".border-right-sm",
+  ".border-top",
+  ".border-top-dashed",
+  ".gradient-green",
+  ".gradient-green-yellow",
+  ".gradient-red-yellow",
+  ".gradient-yellow-red",
+  ".green-shadow",
+  ".has-bottom-gradient-black",
+  ".has-bottom-gradient-green",
+  ".has-gradient-blue-green",
+  ".has-hover--fx",
+  ".is-gradient-green-yellow",
+  ".is-gradient-red-to-yellow",
+  ".is-gradient-yellow-red",
+  ".is-rounded",
+  ".medium-shadow",
+  ".no-border",
+  ".no-border-link",
+  ".radial-gradient-blue-green",
+  ".red-shadow",
+  ".wide-shadow",
+  ".xlight-shadow",
+  ".yellow-shadow"
+];
+
+const animations = [
+  ".animated",
+  ".bounce",
+  ".bounceInUp",
+  ".fadeIn",
+  ".fadeInLeft",
+  ".fadeInRight",
+  ".fadeInUp",
+  ".pulse",
+  ".rotateIn",
+  ".delay-1s",
+  ".delay-1-05s",
+  ".delay-1-15s",
+  ".delay-1-5s",
+  ".delay-2s",
+  ".delay-25s",
+  ".delay-30s",
+  ".delay-35s",
+  ".delay-3s",
+  ".delay-40s",
+  ".delay-45s",
+  ".delay-4s",
+  ".delay-50s",
+  ".delay-55s",
+  ".delay-5s",
+  ".delay-60s",
+  ".delay-65s",
+  ".delay-70s",
+  ".delay-75s",
+  ".delay-80s",
+  ".delay-85s",
+  ".delay-90s",
+  ".delay-95s"
+];
+
+const formatList = (items: string[]) => items.join("\n");
+
+---
+
+<Layout title="Rocksiders — Cheat sheet" description="Cheat sheet compact des classes utilitaires (Rocksiders / Rocks Theme).">
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
+      <aside
+        class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm"
+        data-docs-nav
+      >
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>Navigation</p>
+        <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="rocks-cheatsheet-nav">
+          {sections.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-target={item.id}
+              class="px-3 py-2 whitespace-nowrap rounded-md text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-muted)] transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-14 md:col-start-2 min-w-0">
+        <header class="space-y-4">
+          <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Rocksiders DS</p>
+          <h1 class="text-3xl font-bold text-[var(--text-strong)]">Cheat sheet — classes utilitaires</h1>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            Liste compacte (copiable) des classes utilitaires détectées dans le CSS Rocksiders, organisée par thèmes.
+          </p>
+          <div class="doc-card">
+            <p class="text-sm font-semibold mb-2">Sommaire</p>
+            <div class="flex flex-wrap gap-2">
+              <a class="btn-primary is-outline" href="/wiki-rocks-utilitaires">Rocks — Utilitaires</a>
+              <a class="btn-primary is-outline" href="/wiki-rocks-layout">Rocks — Layout</a>
+              <a class="btn-primary" href="/wiki-rocks-cheatsheet">Rocks — Cheat sheet</a>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <span class="badge-pill">Copiable</span>
+            <span class="badge-pill">Référence</span>
+            <span class="badge-pill">Rocksiders</span>
+          </div>
+        </header>
+
+        <section id="intro" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Contexte</h2>
+          <div class="note-callout">
+            <p class="note-callout__title">Note</p>
+            <p class="note-callout__text">
+              Cette page n’implémente pas ces classes dans ce projet Astro : elle sert de documentation et de base de mapping.
+            </p>
+          </div>
+          <div class="doc-card space-y-3">
+            <p class="text-sm text-[var(--text-muted)]">Astuce : colle ces listes dans un fichier TODO quand tu fais la migration / ré-implémentation.</p>
+            <Code lang="text" code={`Source: Rocks Theme (rocksiders.com)\nDoc: CHEATSHEET-CLASSES.md`} />
+          </div>
+        </section>
+
+        <section id="espacement" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Espacement</h2>
+          <div class="doc-card space-y-3">
+            <p class="text-sm text-[var(--text-muted)]">Padding / margin / helpers + variantes (suffixes l/m/xl).</p>
+            <Code lang="text" code={formatList(spacing)} />
+          </div>
+        </section>
+
+        <section id="typo" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Texte / Typo</h2>
+          <div class="doc-card space-y-3">
+            <Code lang="text" code={formatList(typo)} />
+          </div>
+        </section>
+
+        <section id="couleurs" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Couleurs</h2>
+          <div class="doc-card space-y-3">
+            <Code lang="text" code={formatList(colors)} />
+          </div>
+        </section>
+
+        <section id="layout" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Layout / Display</h2>
+          <div class="doc-card space-y-3">
+            <Code lang="text" code={formatList(layout)} />
+          </div>
+        </section>
+
+        <section id="effets" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Bordures / Effets</h2>
+          <div class="doc-card space-y-3">
+            <Code lang="text" code={formatList(effects)} />
+          </div>
+        </section>
+
+        <section id="animations" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Animations</h2>
+          <div class="doc-card space-y-3">
+            <Code lang="text" code={formatList(animations)} />
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#rocks-cheatsheet-nav");
+  </script>
+</Layout>

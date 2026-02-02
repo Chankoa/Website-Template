@@ -1,0 +1,502 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import "../styles/components/cards.scss";
+import "../styles/components/code-blocks.scss";
+import "../styles/components/expressive-code-overrides.scss";
+import "../styles/components/note-callout.scss";
+import { Code } from "astro-expressive-code/components";
+
+const sections = [
+  { id: "intro", label: "Contexte" },
+  { id: "espacement", label: "Espacement" },
+  { id: "typo", label: "Texte / Typo" },
+  { id: "couleurs", label: "Couleurs" },
+  { id: "effets", label: "Bordures / Ombres / Effets" },
+  { id: "animations", label: "Animations" },
+  { id: "responsive", label: "Suffixes responsive" }
+];
+
+const spacingPadding = [
+  ".padded",
+  ".padded-2x",
+  ".unpadded",
+  ".inner-top-space",
+  ".inner-top-space-2x",
+  ".inner-top-space-4x",
+  ".inner-top-space-6x",
+  ".inner-bottom-space",
+  ".inner-bottom-space-2x",
+  ".inner-bottom-space-4x",
+  ".inner-bottom-space-6x",
+  ".inner-left-space-xs",
+  ".inner-left-space-s",
+  ".inner-left-space",
+  ".inner-right-space-xs",
+  ".inner-right-space-s",
+  ".inner-right-space",
+  ".inner-right-space-2x",
+  ".inner-side-space",
+  ".inner-side-space-2x",
+  ".inner-y-space",
+  ".inner-y-space-2x",
+  ".inner-y-space-4x",
+  ".inner-space-xl",
+  ".inner-space-xxl"
+];
+
+const spacingMarginHelpers = [
+  ".m-auto",
+  ".ml-auto",
+  ".mr-auto",
+  ".no-margin-bottom",
+  ".no-margin-top",
+  ".no-margins",
+  ".side-spacer",
+  ".side-spacer-2x",
+  ".side-spacer-s",
+  ".spacer-2x",
+  ".spacer-4x",
+  ".spacer-bottom",
+  ".spacer-bottom-2x",
+  ".spacer-bottom-4x",
+  ".spacer-left",
+  ".spacer-left-2x",
+  ".spacer-left-s",
+  ".spacer-left-xs",
+  ".spacer-right",
+  ".spacer-right-2x",
+  ".spacer-right-s",
+  ".spacer-right-xs",
+  ".spacer-right-xs-1-2x",
+  ".spacer-top",
+  ".spacer-top-2x",
+  ".spacer-top-3x",
+  ".spacer-top-4x"
+];
+
+const spacingExact = [
+  { cls: ".inner-bottom-space", value: "padding-bottom: 1rem" },
+  { cls: ".inner-bottom-space-2x", value: "padding-bottom: 2rem" },
+  { cls: ".inner-bottom-space-4x", value: "padding-bottom: 4rem" },
+  { cls: ".inner-bottom-space-6x", value: "padding-bottom: 6rem" },
+  { cls: ".inner-left-space", value: "padding-left: 1rem" },
+  { cls: ".inner-left-space-s", value: "padding-left: 0.5rem" },
+  { cls: ".inner-left-space-xs", value: "padding-left: 0.25rem" },
+  { cls: ".inner-right-space", value: "padding-right: 1rem" },
+  { cls: ".inner-right-space-2x", value: "padding-right: 2rem" },
+  { cls: ".inner-right-space-s", value: "padding-right: 0.5rem" },
+  { cls: ".inner-right-space-xs", value: "padding-right: 0.25rem" },
+  { cls: ".inner-side-space", value: "padding-right: 1rem; padding-left: 1rem" },
+  { cls: ".inner-side-space-2x", value: "padding-right: 2rem; padding-left: 2rem" },
+  { cls: ".inner-space-xl", value: "padding-top: 6rem; padding-bottom: 6rem" },
+  { cls: ".inner-space-xxl", value: "padding-top: 10rem; padding-bottom: 10rem" },
+  { cls: ".inner-top-space", value: "padding-top: 1rem" },
+  { cls: ".inner-top-space-2x", value: "padding-top: 2rem" },
+  { cls: ".inner-top-space-4x", value: "padding-top: 4rem" },
+  { cls: ".inner-top-space-6x", value: "padding-top: 6rem" },
+  { cls: ".inner-x-space-2x-l", value: "padding-right: 2rem!important; padding-left: 2rem!important" },
+  { cls: ".inner-x-space-2x-m", value: "padding-right: 2rem!important; padding-left: 2rem!important" },
+  { cls: ".inner-x-space-2x-xl", value: "padding-right: 2rem; padding-left: 2rem" },
+  { cls: ".inner-x-space-l", value: "padding-right: 1rem!important; padding-left: 1rem!important" },
+  { cls: ".inner-x-space-m", value: "padding-right: 1rem!important; padding-left: 1rem!important" },
+  { cls: ".inner-x-space-xl", value: "padding-right: 1rem!important; padding-left: 1rem!important" },
+  { cls: ".inner-y-space", value: "padding-top: 1rem; padding-bottom: 1rem" },
+  { cls: ".inner-y-space-2x", value: "padding-top: 2rem; padding-bottom: 2rem" },
+  { cls: ".inner-y-space-2x-xl", value: "padding-top: 2rem!important; padding-bottom: 2rem!important" },
+  { cls: ".inner-y-space-4x", value: "padding-top: 4rem; padding-bottom: 4rem" },
+  { cls: ".m-auto", value: "margin-right: auto; margin-left: auto (avec variante !important)" },
+  { cls: ".ml-auto", value: "margin-left: auto" },
+  { cls: ".mr-auto", value: "margin-right: auto" },
+  { cls: ".no-margin-bottom", value: "margin-bottom: 0!important" },
+  { cls: ".no-margin-top", value: "margin-top: 0!important" },
+  { cls: ".no-margins", value: "margin: 0!important" },
+  { cls: ".padded", value: "padding: 1rem" },
+  { cls: ".padded-2x", value: "padding: 2rem" },
+  { cls: ".padded-2x-l", value: "padding: 2rem!important" },
+  { cls: ".padded-2x-xl", value: "padding: 2rem!important" },
+  { cls: ".padded-4x-xl", value: "padding: 4rem!important" },
+  { cls: ".padded-left-l", value: "padding-left: 2rem" },
+  { cls: ".padded-left-m", value: "padding-left: 1rem" },
+  { cls: ".side-spacer", value: "margin-right: 1rem; margin-left: 1rem" },
+  { cls: ".side-spacer-2x", value: "margin-right: 2rem; margin-left: 2rem" },
+  { cls: ".side-spacer-s", value: "margin-right: 0.5rem; margin-left: 0.5rem" },
+  { cls: ".spacer-2x", value: "margin-top: 2rem; margin-bottom: 2rem" },
+  { cls: ".spacer-4x", value: "margin-top: 4rem; margin-bottom: 4rem" },
+  { cls: ".spacer-bottom", value: "margin-bottom: 1rem" },
+  { cls: ".spacer-bottom-2x", value: "margin-bottom: 2rem" },
+  { cls: ".spacer-bottom-4x", value: "margin-bottom: 4rem" },
+  { cls: ".spacer-left", value: "margin-left: 1rem" },
+  { cls: ".spacer-left-2x", value: "margin-left: 2rem" },
+  { cls: ".spacer-left-s", value: "margin-left: 0.5rem" },
+  { cls: ".spacer-left-xs", value: "margin-left: 0.25rem" },
+  { cls: ".spacer-right", value: "margin-right: 1rem" },
+  { cls: ".spacer-right-2x", value: "margin-right: 2rem" },
+  { cls: ".spacer-right-s", value: "margin-right: 0.5rem" },
+  { cls: ".spacer-right-xs", value: "margin-right: 0.25rem" },
+  { cls: ".spacer-right-xs-1-2x", value: "margin-right: 0.25rem / 1rem / 2rem" },
+  { cls: ".spacer-top", value: "margin-top: 1rem" },
+  { cls: ".spacer-top-2x", value: "margin-top: 2rem" },
+  { cls: ".spacer-top-3x", value: "margin-top: 3rem" },
+  { cls: ".spacer-top-4x", value: "margin-top: 4rem" },
+  { cls: ".unpadded", value: "padding: 0!important" }
+];
+
+const typoClasses = [
+  ".centered-heading",
+  ".h1",
+  ".h2",
+  ".h3",
+  ".h4",
+  ".h5",
+  ".h6",
+  ".is-big-and-vertical",
+  ".is-big-shape",
+  ".is-big-x5",
+  ".is-big-x10",
+  ".is-big-x15",
+  ".is-big-x20",
+  ".is-black-txt",
+  ".is-bold",
+  ".is-capitalized",
+  ".is-italic",
+  ".is-light",
+  ".is-regular",
+  ".is-small",
+  ".is-strong",
+  ".is-uppercase",
+  ".is-x-small",
+  ".main-font",
+  ".txt-bold",
+  ".txt-center",
+  ".txt-italic",
+  ".txt-left",
+  ".txt-light",
+  ".txt-right"
+];
+
+const colorClasses = [
+  ".color-1",
+  ".color-2",
+  ".color-3",
+  ".color-4",
+  ".color-5",
+  ".color-6",
+  ".color-7",
+  ".color-8",
+  ".color-9",
+  ".color-10",
+  ".color-11",
+  ".color-12",
+  ".txt-color-1",
+  ".txt-color-2",
+  ".txt-color-3",
+  ".txt-color-4",
+  ".txt-color-5",
+  ".txt-color-6",
+  ".txt-color-7",
+  ".txt-color-8",
+  ".txt-color-9",
+  ".txt-color-10",
+  ".txt-color-11",
+  ".txt-color-12"
+];
+
+const effectsClasses = [
+  ".border-bottom",
+  ".border-bottom-dashed",
+  ".border-bottom-left-s",
+  ".border-green",
+  ".border-grey",
+  ".border-left-dashed",
+  ".border-left-m",
+  ".border-left-s",
+  ".border-left-sm",
+  ".border-light-grey",
+  ".border-radius-m",
+  ".border-radius-s",
+  ".border-radius-xs",
+  ".border-right",
+  ".border-right-m",
+  ".border-right-sm",
+  ".border-top",
+  ".border-top-dashed",
+  ".gradient-green",
+  ".gradient-green-yellow",
+  ".gradient-red-yellow",
+  ".gradient-yellow-red",
+  ".green-shadow",
+  ".has-bottom-gradient-black",
+  ".has-bottom-gradient-green",
+  ".has-gradient-blue-green",
+  ".has-hover--fx",
+  ".is-gradient-green-yellow",
+  ".is-gradient-red-to-yellow",
+  ".is-gradient-yellow-red",
+  ".is-rounded",
+  ".medium-shadow",
+  ".no-border",
+  ".no-border-link",
+  ".radial-gradient-blue-green",
+  ".red-shadow",
+  ".wide-shadow",
+  ".xlight-shadow",
+  ".yellow-shadow"
+];
+
+const animationClasses = [
+  ".animated",
+  ".bounce",
+  ".bounceInUp",
+  ".fadeIn",
+  ".fadeInLeft",
+  ".fadeInRight",
+  ".fadeInUp",
+  ".pulse",
+  ".rotateIn",
+  ".delay-1s",
+  ".delay-1-05s",
+  ".delay-1-15s",
+  ".delay-1-5s",
+  ".delay-2s",
+  ".delay-25s",
+  ".delay-30s",
+  ".delay-35s",
+  ".delay-3s",
+  ".delay-40s",
+  ".delay-45s",
+  ".delay-4s",
+  ".delay-50s",
+  ".delay-55s",
+  ".delay-5s",
+  ".delay-60s",
+  ".delay-65s",
+  ".delay-70s",
+  ".delay-75s",
+  ".delay-80s",
+  ".delay-85s",
+  ".delay-90s",
+  ".delay-95s"
+];
+
+const responsiveSuffixes = [
+  ".inner-left-space-s",
+  ".inner-left-space-xs",
+  ".inner-right-space-s",
+  ".inner-right-space-xs",
+  ".inner-space-xl",
+  ".inner-x-space-2x-l",
+  ".inner-x-space-2x-m",
+  ".inner-x-space-2x-xl",
+  ".inner-x-space-l",
+  ".inner-x-space-m",
+  ".inner-x-space-xl",
+  ".inner-y-space-2x-xl",
+  ".padded-2x-l",
+  ".padded-2x-xl",
+  ".padded-4x-xl",
+  ".padded-left-l",
+  ".padded-left-m",
+  ".side-spacer-s",
+  ".spacer-left-s",
+  ".spacer-left-xs",
+  ".spacer-right-s",
+  ".spacer-right-xs"
+];
+
+---
+
+<Layout title="Rocksiders — Utilitaires" description="Référence des classes utilitaires du design system Rocksiders (espacement, typo, couleurs, effets, animations).">
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
+      <aside class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm" data-docs-nav>
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>Navigation</p>
+        <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="rocks-utils-nav">
+          {sections.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-target={item.id}
+              class="px-3 py-2 whitespace-nowrap rounded-md text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-muted)] transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-14 md:col-start-2 min-w-0">
+        <header class="space-y-4">
+          <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Rocksiders DS</p>
+          <h1 class="text-3xl font-bold text-[var(--text-strong)]">Classes utilitaires</h1>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            Ces classes viennent du thème WordPress “Rocks Theme” (rocksiders.com). Cette page les documente telles qu’elles apparaissent dans le CSS source, afin de
+            pouvoir les ré-implémenter / mapper dans ce template si besoin.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="badge-pill">Utilitaires</span>
+            <span class="badge-pill">Cheatsheet</span>
+            <span class="badge-pill">Rocksiders</span>
+          </div>
+        </header>
+
+        <section id="intro" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Contexte</h2>
+          <div class="note-callout">
+            <p class="note-callout__title">Important</p>
+            <p class="note-callout__text">
+              Cette page est une documentation. Si vous voulez que ces classes fonctionnent dans ce projet Astro, il faut soit importer le CSS Rocksiders, soit recréer les
+              règles en SCSS (idéalement en les branchant sur les tokens du design system).
+            </p>
+          </div>
+          <div class="doc-card space-y-3">
+            <p class="text-sm text-[var(--text-muted)]">Exemple de mapping “style guide” (ici, simple démonstration HTML) :</p>
+            <Code
+              lang="html"
+              code={`<div class="padded inner-y-space-2x">
+  <h2 class="h2 is-strong">Titre</h2>
+  <p class="txt-light">Texte secondaire…</p>
+</div>`}
+            />
+          </div>
+        </section>
+
+        <section id="espacement" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Espacement</h2>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Padding</p>
+              <p class="text-sm text-[var(--text-muted)]">Helpers de padding (haut/bas, côtés, variants XL).</p>
+              <div class="flex flex-wrap gap-2">
+                {spacingPadding.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+              <Code lang="html" code={`<section class="inner-y-space-4x inner-side-space">…</section>`} />
+            </div>
+
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Margin & helpers</p>
+              <p class="text-sm text-[var(--text-muted)]">Auto-margins + spacers verticaux/horizontaux.</p>
+              <div class="flex flex-wrap gap-2">
+                {spacingMarginHelpers.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+              <Code lang="html" code={`<div class="spacer-top-2x spacer-bottom">…</div>`} />
+            </div>
+          </div>
+
+          <div class="doc-card space-y-3">
+            <p class="text-sm font-semibold">Valeurs exactes (détectées dans le CSS Rocksiders)</p>
+            <p class="text-sm text-[var(--text-muted)]">Quand elles existent, on conserve les valeurs (rem + !important) pour faciliter une ré-implémentation fidèle.</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-left text-[var(--text-muted)]">
+                    <th class="py-2 pr-4">Classe</th>
+                    <th class="py-2">Règle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {spacingExact.map((item) => (
+                    <tr class="border-t border-[var(--border-soft)]">
+                      <td class="py-2 pr-4 font-mono text-xs">{item.cls}</td>
+                      <td class="py-2 font-mono text-xs">{item.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="typo" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Texte / Typo</h2>
+          <p class="text-[var(--text-muted)]">Classes de tailles (h1–h6), graisse, casing, alignement, etc.</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {typoClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code
+              lang="html"
+              code={`<h2 class="h2 is-uppercase">Titre</h2>
+<p class="txt-light">Texte secondaire</p>
+<p class="txt-center txt-bold">Texte centré</p>`}
+            />
+          </div>
+        </section>
+
+        <section id="couleurs" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Couleurs</h2>
+          <p class="text-[var(--text-muted)]">Classes “color-*” et “txt-color-*” (indexées 1–12).</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {colorClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code
+              lang="html"
+              code={`<div class="color-3 padded">
+  <p class="txt-color-12">Texte</p>
+</div>`}
+            />
+          </div>
+        </section>
+
+        <section id="effets" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Bordures / Ombres / Effets</h2>
+          <p class="text-[var(--text-muted)]">Bordures, radius, gradients, ombres, et micro-effets (hover).</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {effectsClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code
+              lang="html"
+              code={`<a class="no-border-link has-hover--fx" href="#">Lien sans bordure</a>
+<div class="border-top border-bottom-dashed padded is-rounded medium-shadow">Bloc</div>`}
+            />
+          </div>
+        </section>
+
+        <section id="animations" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Animations</h2>
+          <p class="text-[var(--text-muted)]">Classes d’animation + classes de délais (delay-*).</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {animationClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code lang="html" code={`<div class="animated fadeInUp delay-1s">Apparition</div>`} />
+          </div>
+        </section>
+
+        <section id="responsive" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Suffixes responsive</h2>
+          <p class="text-[var(--text-muted)]">Variantes détectées avec suffixes “-s / -m / -l / -xl”. Le détail exact dépend des breakpoints du CSS Rocksiders.</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {responsiveSuffixes.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code lang="text" code={`Exemples:
+- .inner-x-space-m  (padding X à un breakpoint “m”)
+- .padded-2x-xl     (padding 2rem au breakpoint “xl”)`} />
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#rocks-utils-nav");
+  </script>
+</Layout>

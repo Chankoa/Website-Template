@@ -1,0 +1,262 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import "../styles/components/cards.scss";
+import "../styles/components/code-blocks.scss";
+import "../styles/components/expressive-code-overrides.scss";
+import "../styles/components/note-callout.scss";
+import { Code } from "astro-expressive-code/components";
+
+const sections = [
+  { id: "intro", label: "Contexte" },
+  { id: "position", label: "Positionnement" },
+  { id: "containers", label: "Containers" },
+  { id: "grids", label: "Grilles" },
+  { id: "visibility", label: "Visibilité" },
+  { id: "zindex", label: "Z-index" }
+];
+
+const positioningClasses = [
+  ".relative",
+  ".absolute",
+  ".fixed",
+  ".top-0",
+  ".top-1",
+  ".bottom-0",
+  ".bottom-1",
+  ".left-0",
+  ".left-1",
+  ".right-0",
+  ".right-1",
+  ".centerer",
+  ".clear",
+  ".over-h",
+  ".sticky-one",
+  ".top-bar",
+  ".top-minus-25",
+  ".fullscreen-l"
+];
+
+const containerClasses = [
+  ".conteneur",
+  ".conteneur-xs",
+  ".conteneur-xxs",
+  ".full-xl"
+];
+
+const gridFractionClasses = [
+  ".half",
+  ".third",
+  ".two-third",
+  ".quarter",
+  ".three-quarter",
+  ".sixth",
+  ".unguttered",
+  ".grid-half",
+  ".grid-third",
+  ".grid-quarter"
+];
+
+const gridResponsiveVariants = [
+  ".half-s",
+  ".half-m",
+  ".half-l",
+  ".half-xl",
+  ".third-s",
+  ".third-m",
+  ".third-l",
+  ".third-xl",
+  ".two-third-s",
+  ".two-third-m",
+  ".two-third-l",
+  ".two-third-xl",
+  ".quarter-s",
+  ".quarter-m",
+  ".quarter-l",
+  ".quarter-xl",
+  ".three-quarter-s",
+  ".three-quarter-m",
+  ".three-quarter-l",
+  ".three-quarter-xl",
+  ".sixth-s",
+  ".sixth-m",
+  ".sixth-l",
+  ".sixth-xl",
+  ".grid-half-m",
+  ".grid-half-l",
+  ".grid-half-xl",
+  ".grid-third-m",
+  ".grid-third-l",
+  ".grid-third-xl",
+  ".grid-quarter-m",
+  ".grid-quarter-l",
+  ".grid-quarter-xl"
+];
+
+const visibilityClasses = [
+  ".hide-on-small",
+  ".hide-on-large",
+  ".show-on-medium",
+  ".show-on-large",
+  ".show-on-xlarge"
+];
+
+const zIndexClasses = [
+  ".z-depth-0",
+  ".z-1",
+  ".z-10",
+  ".z-50",
+  ".z-100",
+  ".z-1000"
+];
+
+---
+
+<Layout title="Rocksiders — Layout" description="Référence des classes de layout/display du design system Rocksiders (containers, grilles, visibilités, z-index).">
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
+      <aside class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm" data-docs-nav>
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>Navigation</p>
+        <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="rocks-layout-nav">
+          {sections.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-target={item.id}
+              class="px-3 py-2 whitespace-nowrap rounded-md text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-muted)] transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-14 md:col-start-2 min-w-0">
+        <header class="space-y-4">
+          <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Rocksiders DS</p>
+          <h1 class="text-3xl font-bold text-[var(--text-strong)]">Layout & display</h1>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            Sélection des classes liées au layout : positionnement, containers, fractions de grille, visibilités responsive, z-index.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="badge-pill">Layout</span>
+            <span class="badge-pill">Responsive</span>
+            <span class="badge-pill">Rocksiders</span>
+          </div>
+        </header>
+
+        <section id="intro" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Contexte</h2>
+          <div class="note-callout">
+            <p class="note-callout__title">À propos des grilles Rocksiders</p>
+            <p class="note-callout__text">
+              Les classes type <code>.half</code>, <code>.third</code>, <code>.grid-half</code> sont généralement des helpers (float/flex/grid) définis dans le CSS du thème.
+              Ici on documente les noms et l’intention : la règle exacte dépend de l’implémentation CSS importée.
+            </p>
+          </div>
+        </section>
+
+        <section id="position" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Positionnement</h2>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {positioningClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code
+              lang="html"
+              code={`<div class="relative">
+  <div class="absolute top-0 right-0">Badge</div>
+  <div class="over-h">Contenu…</div>
+</div>`}
+            />
+          </div>
+        </section>
+
+        <section id="containers" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Containers</h2>
+          <p class="text-[var(--text-muted)]">Containers “conteneur*” et helpers de largeur.</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {containerClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code lang="html" code={`<div class="conteneur">
+  <h2 class="h2">Titre</h2>
+  <p>Texte…</p>
+</div>`} />
+          </div>
+        </section>
+
+        <section id="grids" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Grilles</h2>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Fractions</p>
+              <div class="flex flex-wrap gap-2">
+                {gridFractionClasses.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+              <Code
+                lang="html"
+                code={`<div class="grid-half">
+  <div class="half">Col A</div>
+  <div class="half">Col B</div>
+</div>`}
+              />
+            </div>
+
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Variantes responsive</p>
+              <div class="flex flex-wrap gap-2">
+                {gridResponsiveVariants.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+              <Code lang="text" code={`Exemples:
+- .half-s, .half-m, .half-l, .half-xl
+- .grid-third-m, .grid-quarter-xl`} />
+            </div>
+          </div>
+        </section>
+
+        <section id="visibility" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Visibilité</h2>
+          <p class="text-[var(--text-muted)]">Helpers show/hide selon des breakpoints.</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {visibilityClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code
+              lang="html"
+              code={`<p class="hide-on-small">Visible à partir d’un breakpoint “medium/large”.</p>
+<p class="show-on-medium">Visible uniquement sur une plage de largeur.</p>`}
+            />
+          </div>
+        </section>
+
+        <section id="zindex" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Z-index</h2>
+          <p class="text-[var(--text-muted)]">Échelles de z-index (1 → 1000) + reset de profondeur.</p>
+          <div class="doc-card space-y-3">
+            <div class="flex flex-wrap gap-2">
+              {zIndexClasses.map((cls) => (
+                <span class="badge-pill">{cls}</span>
+              ))}
+            </div>
+            <Code lang="html" code={`<div class="relative z-10">Au-dessus</div>`} />
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#rocks-layout-nav");
+  </script>
+</Layout>

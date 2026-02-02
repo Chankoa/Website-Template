@@ -34,17 +34,10 @@
   pointer-events: auto;
 }
 
+/*
 @include bp.respond-min(bp.$bp-lg) {
   .desktop-nav {
     display: flex;
   }
-
-  .drawer-toggle {
-    display: none;
-  }
-
-  #mobile-drawer.drawer,
-  #drawer-backdrop {
-    display: none;
-  }
 }
+*/
