@@ -4,15 +4,57 @@ import "../styles/components/cards.scss";
 import "../styles/components/code-blocks.scss";
 import "../styles/components/expressive-code-overrides.scss";
 import "../styles/components/note-callout.scss";
+import "../styles/rocksiders/rocksiders-style.css";
 import { Code } from "astro-expressive-code/components";
 
 const sections = [
   { id: "intro", label: "Contexte" },
   { id: "position", label: "Positionnement" },
   { id: "containers", label: "Containers" },
+  { id: "flexgrid", label: "Flex & Grid" },
   { id: "grids", label: "Grilles" },
   { id: "visibility", label: "Visibilité" },
   { id: "zindex", label: "Z-index" }
+];
+
+const flexboxClasses = [
+  ".flex-grid",
+  ".gutter-grid",
+  ".flex-column",
+  ".row-reverse",
+  ".column-reverse",
+  ".flex-order-1..4",
+  ".flex-order-minus",
+  ".flex-order-auto",
+  ".flex-center",
+  ".vertical-center",
+  ".center",
+  ".content-center",
+  ".justify-space-between",
+  ".justify-space-around",
+  ".justify-content-center",
+  ".justify-content-end",
+  ".align-stretch",
+  ".items-start",
+  ".align-items-center",
+  ".align-self-start",
+  ".align-self-center",
+  ".align-self-end"
+];
+
+const gridCoreClasses = [
+  ".grid-layout",
+  ".grid-half",
+  ".span-2",
+  ".span-3",
+  ".unguttered",
+  ".half",
+  ".third",
+  ".two-third",
+  ".quarter",
+  ".three-quarter",
+  ".fifth",
+  ".sixth",
 ];
 
 const positioningClasses = [
@@ -194,6 +236,76 @@ const zIndexClasses = [
   <h2 class="h2">Titre</h2>
   <p>Texte…</p>
 </div>`} />
+          </div>
+        </section>
+
+        <section id="flexgrid" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Flexbox & Grid</h2>
+          <p class="text-[var(--text-muted)]">
+            Helpers “pratiques” pour centrer et faire des mises en colonnes. Le rendu ci-dessous utilise un sous-ensemble “safe” des classes ROCKSIDERS importées pour le wiki.
+          </p>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Flexbox</p>
+              <div class="flex flex-wrap gap-2">
+                {flexboxClasses.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+
+              <div class="rocksiders-preview-box color-11 border-radius-s" style="min-height: 148px;">
+                <div class="flex-grid gutter-grid" style="min-height: 96px;">
+                  <div class="half color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">.half</div>
+                  <div class="half color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">.half</div>
+                </div>
+                <div class="flex-center" style="margin-top: .75rem; min-height: 44px;">
+                  <div class="color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700;">
+                    .flex-center
+                  </div>
+                </div>
+              </div>
+
+              <Code
+                lang="html"
+                code={`<div class="flex-grid gutter-grid">
+  <div class="half">Col A</div>
+  <div class="half">Col B</div>
+</div>
+
+<div class="flex-center" style="min-height: 96px;">
+  <div>Contenu centré</div>
+</div>`}
+              />
+            </div>
+
+            <div class="doc-card space-y-3 min-w-0">
+              <p class="text-sm font-semibold">Grid Layout</p>
+              <div class="flex flex-wrap gap-2">
+                {gridCoreClasses.map((cls) => (
+                  <span class="badge-pill">{cls}</span>
+                ))}
+              </div>
+
+              <div class="rocksiders-preview-box color-11 border-radius-s">
+                <div class="grid-layout grid-half" style="grid-auto-rows: minmax(44px, auto);">
+                  <div class="color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">A</div>
+                  <div class="color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">B</div>
+                  <div class="color-8 border-radius-xs span-2" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">.span-2</div>
+                  <div class="color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">C</div>
+                  <div class="color-8 border-radius-xs" style="padding: .5rem .75rem; font-weight: 700; text-align:center;">D</div>
+                </div>
+              </div>
+
+              <Code
+                lang="html"
+                code={`<div class="grid-layout grid-half">
+  <div>A</div>
+  <div>B</div>
+  <div class="span-2">Élément sur 2 colonnes</div>
+</div>`}
+              />
+            </div>
           </div>
         </section>
 

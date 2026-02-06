@@ -165,3 +165,64 @@
   padding:1rem;
   border:1px solid rgba(0,0,0,.08);
 }
+
+/* Layout helpers (subset aligned with Rocksiders style.css) */
+.clear{clear:both}
+.over-h{overflow:hidden}
+
+/* Absolute centering helper (as in the theme) */
+.centerer{position:absolute !important;top:50%;left:50%;transform:translate(-50%, -50%)}
+
+/* Flexbox grid */
+.flex-grid{box-sizing:border-box;display:flex;flex:0 1 auto;flex-direction:row;flex-wrap:wrap}
+.flex-column{flex-direction:column}
+.flex-grid.gutter-grid{justify-content:space-between;align-items:center}
+
+.row-reverse{flex-direction:row-reverse}
+.column-reverse{flex-direction:column-reverse}
+
+.flex-order-1{order:1}
+.flex-order-2{order:2}
+.flex-order-3{order:3}
+.flex-order-4{order:4}
+.flex-order-minus{order:-1}
+.flex-order-auto{order:0 !important}
+
+.flex-center{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.vertical-center{display:flex;flex-direction:column;justify-content:center;align-items:center;align-items:flex-start}
+
+/* In a flex context */
+.center{justify-content:center;align-items:center}
+.content-center{display:flex;flex-wrap:wrap;flex:1;justify-content:center}
+
+/* Justify-content */
+.justify-space-between{justify-content:space-between}
+.justify-space-around{justify-content:space-around}
+.justify-content-center{justify-content:center !important}
+.justify-content-end{justify-content:flex-end !important}
+
+/* Align items / self */
+.align-stretch{align-items:stretch}
+.items-start{align-items:flex-start !important}
+.align-items-center{align-items:center !important}
+.align-self-start{align-self:flex-start}
+.align-self-center{align-self:center}
+.align-self-end{align-self:flex-end}
+
+/* Grid layout */
+.grid-layout{display:grid !important;grid-gap:1rem;grid-template-columns:1fr}
+.grid-half{grid-template-columns:repeat(2, 1fr)}
+.span-2{grid-column:span 2}
+.span-3{grid-column:span 3}
+.unguttered{grid-gap:0}
+
+/* Fractions (used with float/flex wrappers in the theme) */
+.simple-grid,.double-grid,.half,.half-s,.half-m,.half-l,.half-xl,.half-xxl,.third,.third-s,.third-m,.third-l,.third-xl,.two-third,.two-third-s,.two-third-m,.two-third-l,.two-third-xl,.quarter,.quarter-s,.quarter-m,.quarter-l,.quarter-xl,.three-quarter,.three-quarter-s,.three-quarter-m,.three-quarter-l,.three-quarter-xl,.fifth,.fifth-s,.fifth-m,.fifth-l,.fifth-xl,.sixth,.sixth-s,.sixth-m,.sixth-l,.sixth-xl{width:100%}
+.half,.half-s{width:50%}
+.quarter,.quarter-s{width:25%}
+.three-quarter,.three-quarter-s{width:75%}
+.third{width:33.33% !important}
+.third-s{width:33.33%}
+.two-third,.two-third-s{width:66.66%}
+.sixth,.sixth-s{width:16.6666667%}
+.fifth,.fifth-s{width:20%}
