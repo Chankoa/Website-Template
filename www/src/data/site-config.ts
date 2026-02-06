@@ -23,6 +23,7 @@ export const siteConfig = {
     { label: "Services", href: "/services" },
     { label: "Wiki UI", href: "/wiki-ui" },
     { label: "Guide des styles", href: "/guide-styles" },
+    { label: "Rocks — DS", href: "/wiki-rocks-design-system" },
     { label: "Rocks — Utilitaires", href: "/wiki-rocks-utilitaires" },
     { label: "Rocks — Layout", href: "/wiki-rocks-layout" },
     { label: "Rocks — Cheat sheet", href: "/wiki-rocks-cheatsheet" },

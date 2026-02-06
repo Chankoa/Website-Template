@@ -1,0 +1,389 @@
+---
+import Layout from "../components/layout/Layout.astro";
+import "../styles/components/cards.scss";
+import "../styles/components/code-blocks.scss";
+import "../styles/components/expressive-code-overrides.scss";
+import "../styles/components/note-callout.scss";
+import "../styles/rocksiders/rocksiders-style.css";
+import { Code } from "astro-expressive-code/components";
+
+const sections = [
+  { id: "intro", label: "Intro" },
+  { id: "couleurs", label: "Couleurs" },
+  { id: "typo", label: "Typographie" },
+  { id: "radii-shadows", label: "Radii & ombres" },
+  { id: "buttons", label: "Boutons" },
+  { id: "cards", label: "Cards" },
+  { id: "gradients", label: "Gradients" },
+  { id: "utils", label: "Utilitaires" },
+];
+
+// --- ROCKSIDERS (style.css) — éléments réellement définis via classes / valeurs ---
+const palette = [
+  { name: "Noir", value: "#000", classes: [".color-1", ".txt-color-1"] },
+  { name: "Gris", value: "#c1c1c1", classes: [".color-2", ".txt-color-2"] },
+  { name: "Bleu-vert (liens)", value: "#077a75", classes: [".color-3", ".txt-color-3"] },
+  { name: "Vert accent", value: "#0c9", classes: [".color-4", ".txt-color-4", ".border-green"] },
+  { name: "Orange", value: "#ff9000", classes: [".color-5", ".txt-color-5", ".border-orange"] },
+  { name: "Jaune", value: "#f9f871", classes: [".color-6", ".txt-color-6", ".border-yellow"] },
+  { name: "Gris très clair", value: "#fafafa", classes: [".color-7", ".txt-color-7"] },
+  { name: "Blanc", value: "#fff", classes: [".color-8", ".txt-color-8"] },
+  { name: "Noir doux", value: "#111", classes: [".color-9", ".txt-color-9"] },
+  { name: "Noir 50%", value: "rgba(0,0,0,.5)", classes: [".color-10", ".txt-color-10"] },
+  { name: "Gris UI", value: "#eaeaea", classes: [".color-11", ".txt-color-11"] },
+  { name: "Rouge", value: "#ee5842", classes: [".color-12", ".txt-color-12", ".border-red"] },
+];
+
+const fontFamiliesRocks = [
+  {
+    family: "Open Sans",
+    usage: "Texte courant (body)",
+    weights: "300 / 400",
+    classes: [".main-font"],
+  },
+  {
+    family: "Roboto",
+    usage: "Titres (h1..h6)",
+    weights: "300 / 400 / 700 / 900",
+    classes: [".custom-font"],
+  },
+  {
+    family: "eurostile",
+    usage: "Marque / signature",
+    weights: "400 / 800 / 900",
+    classes: [".custom-font-1", ".tk-eurostile"],
+  },
+];
+
+const headingScaleRocks = [
+  { selector: "body", value: "18px (desktop: 16px)" },
+  { selector: "h1, .h1", value: "1.875rem, font-weight: 900" },
+  { selector: "h2, .h2", value: "1.5rem" },
+  { selector: "h3, .h3", value: "1.25rem" },
+  { selector: "h4, .h4", value: "1.125rem" },
+  { selector: "h5, .h5", value: "1rem" },
+  { selector: "h6, .h6", value: "0.875rem" },
+];
+
+const radiiClassesRocks = [
+  { className: ".border-radius-xs", value: "0.25rem" },
+  { className: ".border-radius-s", value: "0.5rem" },
+  { className: ".border-radius-m", value: "1rem" },
+  { className: ".round-btn", value: "0.25rem" },
+  { className: ".is-rounded", value: "2.5rem" },
+];
+
+const shadowClassesRocks = [
+  { className: ".xlight-shadow", value: "0 .25rem .5rem rgba(0,0,0,.05)" },
+  { className: ".wide-shadow", value: "0 0 50px rgba(13,46,94,.2)" },
+  { className: ".medium-shadow", value: "0 15px 50px 0 rgba(51,51,51,.1)" },
+  { className: ".green-shadow", value: "0 .5rem 1rem rgba(0,204,153,.2)" },
+  { className: ".yellow-shadow", value: "0 .5rem 1rem rgba(255,144,0,.25)" },
+  { className: ".red-shadow", value: "0 .5rem 1rem rgba(238,89,65,.25)" },
+];
+
+const utilityHighlightsRocks = [
+  { title: "Couleurs", items: [".color-1..12", ".txt-color-1..12", ".border-green/.border-yellow/.border-orange/.border-red"] },
+  { title: "Typo", items: [".main-font", ".custom-font", ".custom-font-1"] },
+  { title: "Radii & ombres", items: [".border-radius-xs/.s/.m", ".is-rounded", ".xlight-shadow/.medium-shadow/.wide-shadow"] },
+  { title: "Boutons", items: [".btn", ".btn-outline", ".btn-outline-white", ".btn-success"] },
+  { title: "Gradients", items: [".has-gradient-blue-green", ".radial-gradient-blue-green", ".gradient-yellow-red", ".gradient-green-yellow"] },
+];
+
+---
+
+<Layout
+  title="ROCKSIDERS — Référence CSS (style.css)"
+  description="Référence basée uniquement sur les styles présents dans le CSS ROCKSIDERS fourni (couleurs, typo, boutons, cards, gradients, utilitaires)."
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)]">
+      <aside
+        class="sticky top-0 z-20 self-start md:top-[calc(var(--space-10)-var(--space-1))] md:col-start-1 bg-[var(--surface-card)] border border-[var(--border-soft)] rounded-lg p-3 md:p-4 shadow-sm"
+        data-docs-nav
+      >
+        <p class="text-sm font-semibold text-[var(--text-strong)] mb-3" data-docs-nav-title>
+          ROCKSIDERS — CSS
+        </p>
+        <nav class="flex md:flex-col gap-2 overflow-x-auto pb-1" id="rocks-ds-nav">
+          {sections.map((item) => (
+            <a
+              href={`#${item.id}`}
+              data-target={item.id}
+              class="px-3 py-2 whitespace-nowrap rounded-md text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-muted)] transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-14 md:col-start-2 min-w-0">
+        <header class="space-y-4" id="intro" data-spy-section>
+          <p class="text-sm uppercase tracking-[0.08em] text-[var(--text-muted)]">Rocksiders DS</p>
+          <h1 class="text-3xl font-bold text-[var(--text-strong)]">Référence CSS (style.css)</h1>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            Cette page documente uniquement les éléments de design définis dans le CSS ROCKSIDERS (WordPress).
+            Elle n’affiche pas les tokens/thèmes du template Astro.
+          </p>
+          <div class="doc-card">
+            <p class="text-sm font-semibold mb-2">Sommaire</p>
+            <div class="flex flex-wrap gap-2">
+              <a class="btn-primary" href="/wiki-rocks-design-system">Rocks — Design System</a>
+              <a class="btn-primary is-outline" href="/wiki-rocks-utilitaires">Rocks — Utilitaires</a>
+              <a class="btn-primary is-outline" href="/wiki-rocks-layout">Rocks — Layout</a>
+              <a class="btn-primary is-outline" href="/wiki-rocks-cheatsheet">Rocks — Cheat sheet</a>
+            </div>
+          </div>
+
+          <div class="note-callout">
+            <p class="note-callout__title">Source unique</p>
+            <p class="note-callout__text">CSS ROCKSIDERS : <code>wp-content/themes/rocks-theme/css/style.css</code></p>
+          </div>
+        </header>
+
+        <section id="couleurs" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Couleurs</h2>
+          <p class="text-[var(--text-muted)]">
+            Palette définie dans le CSS ROCKSIDERS via <code>.color-*</code> (background) et <code>.txt-color-*</code> (color).
+            Des helpers de bordure existent aussi.
+          </p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {palette.map((c) => (
+              <div class="doc-card space-y-3">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-12 h-12 rounded-md border border-[var(--border-soft)]"
+                    style={`background:${c.value}`}
+                    aria-hidden="true"
+                  />
+                  <div class="min-w-0">
+                    <p class="font-semibold text-[var(--text-strong)] truncate">{c.name}</p>
+                    <p class="text-sm text-[var(--text-muted)] truncate">{c.value}</p>
+                  </div>
+                </div>
+                <p class="text-xs text-[var(--text-muted)]">Classes : <code>{c.classes.join(", ")}</code></p>
+              </div>
+            ))}
+          </div>
+
+          <div class="doc-card space-y-3">
+            <p class="text-sm font-semibold">Exemples</p>
+            <Code
+              lang="html"
+              code={`<div class="color-4">Fond vert accent</div>\n<p class="txt-color-3">Texte lien (#077a75)</p>\n<div class="border-orange">Bordure orange</div>`}
+            />
+          </div>
+        </section>
+
+        <section id="typo" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Typographie</h2>
+          <p class="text-[var(--text-muted)]">Familles et échelle telles qu’elles sont définies dans le CSS ROCKSIDERS.</p>
+
+          <div class="doc-card space-y-3">
+            <p class="text-sm font-semibold">Font-families</p>
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              {fontFamiliesRocks.map((f) => (
+                <li>
+                  <span class="font-semibold text-[var(--text-strong)]">{f.family}</span> — {f.usage} (weights: {f.weights}) —
+                  classes: <code>{f.classes.join(", ")}</code>
+                </li>
+              ))}
+            </ul>
+            <Code
+              lang="css"
+              code={`body {\n  font-family: "Open Sans", sans-serif;\n  font-size: 18px;\n  line-height: 1.6;\n}\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: "Roboto", sans-serif;\n  font-weight: 700;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 1.875rem;\n}`} 
+            />
+          </div>
+
+          <div class="doc-card space-y-3">
+            <p class="text-sm font-semibold">Échelle (titres / base)</p>
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              {headingScaleRocks.map((t) => (
+                <li><code>{t.selector}</code> : {t.value}</li>
+              ))}
+            </ul>
+            <p class="text-xs text-[var(--text-muted)]">Note : à partir de <code>min-width: 62.063em</code>, le body passe à <code>16px</code>.</p>
+          </div>
+        </section>
+
+        <section id="radii-shadows" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Radii & ombres</h2>
+          <p class="text-[var(--text-muted)]">Extraits des classes et valeurs présentes dans le CSS ROCKSIDERS.</p>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="doc-card space-y-2">
+              <p class="text-sm font-semibold">Radii</p>
+              <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+                {radiiClassesRocks.map((r) => (
+                  <li><code>{r.className}</code> : {r.value}</li>
+                ))}
+              </ul>
+              <Code lang="css" code={`.border-radius-xs { border-radius: .25rem; }\n.is-rounded { border-radius: 2.5rem; }`} />
+            </div>
+
+            <div class="doc-card space-y-2">
+              <p class="text-sm font-semibold">Ombres</p>
+              <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+                {shadowClassesRocks.map((s) => (
+                  <li><code>{s.className}</code> : {s.value}</li>
+                ))}
+              </ul>
+              <Code
+                lang="css"
+                code={`.xlight-shadow { box-shadow: 0 .25rem .5rem rgba(0,0,0,.05); }\n.medium-shadow { box-shadow: 0 15px 50px 0 rgba(51,51,51,.1); }`} 
+              />
+            </div>
+          </div>
+
+          <div class="doc-card space-y-3">
+            <p class="text-sm font-semibold">Preview</p>
+            <div class="grid sm:grid-cols-3 gap-3">
+              <div class="rocksiders-preview-box border-radius-xs xlight-shadow color-8">
+                <p class="text-sm font-semibold txt-color-9">XS + xlight</p>
+                <p class="text-xs txt-color-10"><code>.border-radius-xs</code> + <code>.xlight-shadow</code></p>
+              </div>
+              <div class="rocksiders-preview-box border-radius-s green-shadow color-8">
+                <p class="text-sm font-semibold txt-color-9">S + green</p>
+                <p class="text-xs txt-color-10"><code>.border-radius-s</code> + <code>.green-shadow</code></p>
+              </div>
+              <div class="rocksiders-preview-box border-radius-m red-shadow color-8">
+                <p class="text-sm font-semibold txt-color-9">M + red</p>
+                <p class="text-xs txt-color-10"><code>.border-radius-m</code> + <code>.red-shadow</code></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="buttons" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Boutons</h2>
+          <p class="text-[var(--text-muted)]">Classes présentes dans le CSS ROCKSIDERS (CTA vert, outline, variante gradient).</p>
+
+          <div class="doc-card space-y-3">
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              <li><code>.btn</code>, <code>.round-btn</code>, <code>input[type=submit]</code></li>
+              <li><code>.btn-outline</code>, <code>.btn-outline-white</code></li>
+              <li><code>.btn-success</code> (gradient orange → rouge)</li>
+              <li><code>.is-rounded</code> (pill)</li>
+            </ul>
+            <Code
+              lang="css"
+              code={`.btn {\n  color: #fff;\n  background-color: #0c9;\n  padding: .75rem 1.5rem;\n}\n\n.btn-outline {\n  border: 1px solid #0c9;\n  background: transparent;\n  color: #0c9;\n}\n\n.btn-success {\n  background: linear-gradient(to left bottom, #ff9000, #ee5941);\n}`} 
+            />
+            <Code lang="html" code={`<a class="btn is-rounded" href="#">Action</a>\n<a class="btn btn-outline" href="#">Secondaire</a>\n<a class="btn btn-success" href="#">CTA</a>`} />
+
+            <div class="rocksiders-preview-box color-8">
+              <p class="text-sm font-semibold">Preview</p>
+              <div style="display:flex; gap: .75rem; flex-wrap: wrap; align-items:center; margin-top: .75rem;">
+                <a href="#" class="btn">.btn</a>
+                <a href="#" class="btn btn-outline">.btn-outline</a>
+                <a href="#" class="btn btn-outline-white color-9" style="background-color:#111">.btn-outline-white</a>
+                <a href="#" class="btn btn-success">.btn-success</a>
+                <a href="#" class="btn is-rounded">.is-rounded</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cards" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Cards</h2>
+          <p class="text-[var(--text-muted)]">Le CSS définit notamment une card produit (fond blanc, hover + ombre).</p>
+
+          <div class="doc-card space-y-3">
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              <li><code>.product-card</code> : <code>border-radius: .25rem</code>, overflow hidden</li>
+              <li><code>.product-card.white-bg</code> : fond blanc ~95% + ombre légère</li>
+              <li><code>.product-card:hover</code> : ombre médium</li>
+            </ul>
+            <Code
+              lang="css"
+              code={`.product-card {\n  border-radius: .25rem;\n  overflow: hidden;\n}\n\n.product-card.white-bg {\n  background-color: hsla(0,0%,100%,.95);\n  box-shadow: 0 .25rem .5rem rgba(0,0,0,.05);\n}\n\n.product-card:hover {\n  box-shadow: 0 15px 50px 0 rgba(51,51,51,.1);\n}`} 
+            />
+
+            <div class="rocksiders-preview-box color-8">
+              <p class="text-sm font-semibold">Preview</p>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: .75rem;">
+                <div class="product-card white-bg" style="padding: 1rem;">
+                  <div class="txt-color-9" style="font-weight:700; margin-bottom:.25rem;">.product-card.white-bg</div>
+                  <div class="txt-color-10">Survolez pour voir l’ombre.</div>
+                  <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap;">
+                    <span class="rocksiders-preview-box border-radius-xs color-11" style="padding:.25rem .5rem;">.color-11</span>
+                    <span class="rocksiders-preview-box border-radius-xs color-6" style="padding:.25rem .5rem;">.color-6</span>
+                  </div>
+                </div>
+                <div class="product-card" style="padding: 1rem; background: rgba(0,0,0,.03);">
+                  <div class="txt-color-9" style="font-weight:700; margin-bottom:.25rem;">.product-card</div>
+                  <div class="txt-color-10">Variante neutre.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="gradients" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Gradients</h2>
+          <p class="text-[var(--text-muted)]">Gradients utilitaires présents dans le CSS (fonds et texte).</p>
+
+          <div class="doc-card space-y-3">
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              <li><code>.has-gradient-blue-green</code> : linear-gradient(45deg #077a75 → #0c9)</li>
+              <li><code>.radial-gradient-blue-green</code></li>
+              <li><code>.gradient-green-yellow</code>, <code>.gradient-yellow-red</code>, <code>.gradient-red-yellow</code></li>
+              <li><code>.is-gradient-red-to-yellow</code>, <code>.is-gradient-green-yellow</code> (texte)</li>
+            </ul>
+            <Code
+              lang="css"
+              code={`.has-gradient-blue-green {\n  background: linear-gradient(45deg, rgb(7,122,117) 8%, rgb(0,204,153) 100%);\n}\n\n.gradient-yellow-red {\n  background: linear-gradient(to right top, #ff9000, #ee5941);\n}`} 
+            />
+
+            <div class="rocksiders-preview-box color-8">
+              <p class="text-sm font-semibold">Preview</p>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: .75rem;">
+                <div class="rocksiders-preview-box has-gradient-blue-green border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
+                  .has-gradient-blue-green
+                </div>
+                <div class="rocksiders-preview-box radial-gradient-blue-green border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
+                  .radial-gradient-blue-green
+                </div>
+                <div class="rocksiders-preview-box gradient-green-yellow border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; color:#111; font-weight:700;">
+                  .gradient-green-yellow
+                </div>
+                <div class="rocksiders-preview-box gradient-yellow-red border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
+                  .gradient-yellow-red
+                </div>
+                <div class="rocksiders-preview-box color-8 border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; font-weight:800;">
+                  <span class="is-gradient-red-to-yellow">.is-gradient-red-to-yellow</span>
+                </div>
+                <div class="rocksiders-preview-box color-8 border-radius-s" style="min-height: 88px; display:flex; align-items:center; justify-content:center; font-weight:800;">
+                  <span class="is-gradient-green-yellow">.is-gradient-green-yellow</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="utils" class="scroll-mt-24 space-y-4" data-spy-section>
+          <h2 class="text-2xl font-semibold text-[var(--text-strong)]">Utilitaires</h2>
+          <p class="text-[var(--text-muted)]">Liste rapide des entrées “design” réellement présentes dans le CSS :</p>
+
+          <div class="doc-card space-y-3">
+            <ul class="list-disc list-inside text-[var(--text-muted)] text-sm space-y-1">
+              {utilityHighlightsRocks.map((g) => (
+                <li>
+                  <span class="font-semibold text-[var(--text-strong)]">{g.title} :</span> <code>{g.items.join(", ")}</code>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { initWikiPage } from "../scripts/wiki-shared";
+
+    initWikiPage("#rocks-ds-nav");
+  </script>
+</Layout>
