@@ -5,6 +5,10 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   padding: var(--space-4);
+  /* Prevent children (code, long tokens) from forcing page-wide overflow */
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .card-elevated {

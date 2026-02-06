@@ -6,6 +6,9 @@ code:not([class*="language-"]) {
   border-radius: 0.35rem;
   font-size: 0.85em;
   border: 1px solid rgba(148, 163, 184, 0.35);
+  /* Allow long tokens (e.g. class lists) to wrap instead of overflowing */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 :root[data-theme="dark"] code:not([class*="language-"]) {
@@ -128,7 +131,10 @@ code:not([class*="language-"]) {
 
 /* Expressive Code (Astro integration) */
 .expressive-code {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  overflow-x: auto;
 
   /* Drive EC's internal styling via CSS variables so it still applies
      even when EC injects its stylesheet in the page body. */
@@ -181,8 +187,11 @@ code:not([class*="language-"]) {
   );
   border-left: 3px solid color-mix(in srgb, var(--code-accent) 70%, transparent);
   padding-left: calc(var(--space-2) * 0.75);
-  margin-left: -0.35rem;
-  margin-right: -0.35rem;
+  /* Avoid negative margins that can cause page-level horizontal overflow on small screens.
+     Use !important to override Expressive Code's injected stylesheet. */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: calc(var(--space-2) * 0.75);
 }
 
 /* Contextual highlight based on language */
@@ -206,5 +215,17 @@ code:not([class*="language-"]) {
 /* Ensure long lines don't force the grid wider */
 .expressive-code pre {
   max-width: 100%;
+  overflow-x: auto !important;
+}
+
+/* Extra containment: prevent inner frames from forcing the layout wider */
+.expressive-code,
+.expressive-code .frame {
+  max-width: 100% !important;
+  min-width: 0;
+}
+
+.expressive-code .frame {
+  width: 100% !important;
 }
 
